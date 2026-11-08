@@ -1,0 +1,272 @@
+
+==============================================================================
+1. Integrity
+==============================================================================
+rows: 63648 | distinct: {'Interval': 78, 'Manufacturer': 4, 'Product': 4, 'State': 51} | full grid size: 63648
+duplicate keys: 0 | blanks: 0 | negatives: 0 | zeros: 1935
+months: 2020-01 -> 2026-06 | gaps: 0
+count    63648.0
+mean        24.5
+std         45.3
+min          0.0
+50%         10.0
+90%         60.0
+99%        197.0
+max       1019.0
+
+==============================================================================
+2. Market total
+==============================================================================
+Seasonal index (month / January):
+ Month   1      2      3      4      5      6      7      8      9      10     11     12
+Year                                                                                   
+2020   1.0  1.251  2.002  2.751  2.502  4.003  3.253  3.002  1.999  1.501  1.001  0.751
+2021   1.0  1.249  1.997  2.748  2.497  3.997  3.247  2.997  1.998  1.499  0.998  0.749
+2022   1.0  1.252  2.003  2.753  2.505  4.006  3.255  3.005  2.002  1.502  1.001  0.749
+2023   1.0  1.252  2.003  2.754  2.503  4.005  3.256  3.001  2.002  1.501  1.000  0.750
+2024   1.0  1.250  2.002  2.753  2.502  4.004  3.254  3.004  2.003  1.501  1.002  0.751
+2025   1.0  1.251  1.999  2.752  2.500  4.000  3.252  3.001  2.001  1.500  1.000  0.750
+2026   1.0  1.249  1.999  2.751  2.500  4.002    NaN    NaN    NaN    NaN    NaN    NaN
+
+Index vs same month of 2020:
+ Month     1      2      3      4      5      6     7      8      9      10     11     12
+Year                                                                                    
+2020   1.000  1.000  1.000  1.000  1.000  1.000  1.00  1.000  1.000  1.000  1.000  1.000
+2021   1.042  1.040  1.039  1.040  1.040  1.040  1.04  1.040  1.041  1.040  1.038  1.039
+2022   0.959  0.960  0.960  0.960  0.961  0.960  0.96  0.960  0.961  0.960  0.959  0.957
+2023   0.919  0.920  0.920  0.920  0.920  0.920  0.92  0.919  0.921  0.919  0.918  0.918
+2024   0.879  0.879  0.880  0.880  0.880  0.880  0.88  0.880  0.881  0.879  0.880  0.879
+2025   0.940  0.940  0.939  0.941  0.940  0.940  0.94  0.940  0.941  0.939  0.939  0.939
+2026   0.928  0.927  0.927  0.928  0.928  0.928   NaN    NaN    NaN    NaN    NaN    NaN
+
+       full_year      H1  H1_share_of_year  naive_FY_yoy_%  H1_yoy_%
+Year                                                               
+2020     250014  135005              0.54             NaN       NaN
+2021     259996  140411              0.54             4.0       4.0
+2022     239993  129607              0.54            -7.7      -7.7
+2023     229968  124205              0.54            -4.2      -4.2
+2024     219947  118754              0.54            -4.4      -4.4
+2025     234966  126870              0.54             6.8       6.8
+2026     125278  125278              1.00           -46.7      -1.3
+
+==============================================================================
+3. Manufacturer share
+==============================================================================
+Annual share %:
+ Manufacturer  Valley Central  Neptune  Cornfield  Barefoot
+Year                                                      
+2020                   37.40    28.22      21.25     13.13
+2021                   39.70    30.77      22.86      6.68
+2022                   39.15    31.78      22.12      6.95
+2023                   40.79    33.52      20.90      4.79
+2024                   42.98    31.65      20.49      4.88
+2025                   43.73    30.24      18.00      8.02
+2026                   43.77    33.63      18.53      4.08
+
+H1 units:
+ Manufacturer  Valley Central  Neptune  Cornfield  Barefoot
+Year                                                      
+2020                   51701    38636      29099     15569
+2021                   54731    41592      32709     11379
+2022                   50658    40781      29518      8650
+2023                   50291    41213      25943      6758
+2024                   51601    38588      25371      3194
+2025                   54904    37116      24171     10679
+2026                   54830    42125      23215      5108
+
+H1 YoY %:
+ Manufacturer  Valley Central  Neptune  Cornfield  Barefoot
+Year                                                      
+2020                     NaN      NaN        NaN       NaN
+2021                     5.9      7.7       12.4     -26.9
+2022                    -7.4     -1.9       -9.8     -24.0
+2023                    -0.7      1.1      -12.1     -21.9
+2024                     2.6     -6.4       -2.2     -52.7
+2025                     6.4     -3.8       -4.7     234.3
+2026                    -0.1     13.5       -4.0     -52.2
+
+MoM share change (pp, rounded) counts:
+ Manufacturer  Valley Central  Neptune  Cornfield  Barefoot
+-3.0                       0        0          0         5
+-2.0                       0        0          0         9
+-1.0                      21       23         28         9
+ 0.0                      31       29         23        25
+ 1.0                      25       25         26        23
+ 2.0                       0        0          0         3
+ 3.0                       0        0          0         3
+
+Fractional part of share (whole-point lattice check):
+ Manufacturer  Valley Central  Neptune  Cornfield  Barefoot
+mean                  -0.253    0.018     -0.001     0.236
+std                    0.028    0.024      0.023     0.034
+
+Barefoot moves of 3 points (all three big brands moved the same way):
+ Manufacturer  Valley Central  Neptune  Cornfield  Barefoot
+Date                                                      
+2020-04-01              -1.0     -1.0       -1.0       3.0
+2021-01-01               1.0      1.0        1.0      -3.0
+2021-02-01               1.0      1.0        1.0      -3.0
+2021-07-01               1.0      1.0        1.0      -3.0
+2021-12-01              -1.0     -1.0       -1.0       3.0
+2023-11-01               1.0      1.0        1.0      -3.0
+2024-12-01              -1.0     -1.0       -1.0       3.0
+2026-01-01               1.0      1.0        1.0      -3.0
+
+Correlation of MoM share changes (the plug is the only one correlated with the others):
+ Manufacturer    Valley Central  Neptune  Cornfield  Barefoot
+Manufacturer                                                
+Valley Central            1.00    -0.00       0.05     -0.58
+Neptune                  -0.00     1.00      -0.00     -0.56
+Cornfield                 0.05    -0.00       1.00     -0.62
+Barefoot                 -0.58    -0.56      -0.62      1.00
+Lag-1 autocorrelation of MoM share changes (≈0 means random walk, no momentum): {'Valley Central': 0.05, 'Neptune': 0.18, 'Cornfield': -0.06, 'Barefoot': 0.04}
+
+H1 2020 -> H1 2026: market 135,005 -> 125,278 (-7.2%)
+                 H1 2020  H1 2026  change  market_effect  share_effect  share_pts
+Manufacturer                                                                    
+Valley Central    51701    54830    3129        -3725.0        6854.0        5.5
+Neptune           38636    42125    3489        -2783.7        6272.7        5.0
+Cornfield         29099    23215   -5884        -2096.6       -3787.4       -3.0
+Barefoot          15569     5108  -10461        -1121.7       -9339.3       -7.5
+
+H1 2025 -> H1 2026: market 126,870 -> 125,278 (-1.3%)
+                 H1 2025  H1 2026  change  market_effect  share_effect  share_pts
+Manufacturer                                                                    
+Valley Central    54904    54830     -74         -689.0         615.0        0.5
+Neptune           37116    42125    5009         -465.7        5474.7        4.4
+Cornfield         24171    23215    -956         -303.3        -652.7       -0.5
+Barefoot          10679     5108   -5571         -134.0       -5437.0       -4.3
+
+==============================================================================
+4. Product mix
+==============================================================================
+Annual product share %:
+ Product   Rail   Call  Premium  Top Shelf
+Year                                     
+2020     29.06  17.25    29.84      23.84
+2021     35.51  14.73    33.24      16.52
+2022     26.85  19.65    33.37      20.13
+2023     21.44  16.74    31.71      30.11
+2024     21.81  10.49    38.65      29.05
+2025     27.78   3.97    31.89      36.36
+2026     29.30   5.77    29.99      34.94
+
+Spread of each tier's share across the 4 manufacturers in the same month (pp):
+ Product  Rail  Call  Premium  Top Shelf
+mean     0.21  0.26     0.21       0.19
+50%      0.13  0.20     0.14       0.11
+max      0.95  1.41     1.00       0.96
+Separability: median |rel. dev| = 0.11%, 99th pct = 5.14% (large deviations only in tiny cells)
+Correlation of MoM tier share changes (Top Shelf behaves as the tier plug):
+ Product    Rail  Call  Premium  Top Shelf
+Product                                  
+Rail       1.00 -0.02    -0.13      -0.61
+Call      -0.02  1.00    -0.06      -0.40
+Premium   -0.13 -0.06     1.00      -0.57
+Top Shelf -0.61 -0.40    -0.57       1.00
+MoM sd of tier share (pp): {'Rail': 1.83, 'Call': 1.17, 'Premium': 1.79, 'Top Shelf': 2.6}
+
+==============================================================================
+5. State allocation
+==============================================================================
+State weights (blocks >= 1,500 units) — mean and std of share across 389 blocks:
+         mean    std
+State               
+FL     16.185  0.018
+TX      5.902  0.013
+MI      4.728  0.013
+MN      4.304  0.014
+NC      4.015  0.013
+WI      3.967  0.013
+SC      3.381  0.013
+CA      3.363  0.013
+GA      3.053  0.013
+WA      2.997  0.013
+NY      2.989  0.012
+LA      2.755  0.013
+AL      2.681  0.013
+TN      2.368  0.013
+OH      2.312  0.012
+MA      2.259  0.013
+VA      2.147  0.014
+IL      2.120  0.012
+MO      2.077  0.013
+PA      1.913  0.012
+IN      1.748  0.013
+NJ      1.714  0.013
+MD      1.640  0.013
+AR      1.637  0.013
+OR      1.418  0.013
+AK      1.405  0.013
+ME      1.320  0.013
+MS      1.307  0.013
+KY      1.168  0.013
+OK      1.048  0.012
+IA      0.960  0.014
+CT      0.953  0.014
+NH      0.787  0.012
+ND      0.712  0.013
+AZ      0.685  0.014
+ID      0.659  0.012
+CO      0.563  0.013
+MT      0.542  0.013
+NE      0.473  0.013
+SD      0.473  0.013
+DE      0.460  0.013
+KS      0.440  0.012
+RI      0.404  0.013
+UT      0.399  0.013
+WV      0.358  0.015
+HI      0.331  0.012
+NV      0.247  0.012
+VT      0.209  0.013
+WY      0.177  0.013
+DC      0.131  0.013
+NM      0.115  0.011
+Top 4 states = 31.1% of units; bottom 25 = 14.9%
+Max |actual - block x weight| over all 63,648 cells: 1.30 units
+round(B x w) reproduces 77% of blocks exactly; mean abs cell error 0.005 units
+Observed block total vs implied (rounding loss):
+               blocks  mean_gap_pct  worst_gap_pct
+implied                                          
+(0, 25]            4         -16.9          -31.2
+(25, 50]           7          -5.6          -10.3
+(50, 100]         36          -3.3           -7.9
+(100, 200]        87           0.1           -5.8
+(200, 500]       236           0.1           -2.3
+(500, 20000]     878           0.0           -0.5
+
+==============================================================================
+6. Outliers & traps
+==============================================================================
+IQR fence 64: 5,594 cells flagged (8.8%); 64% are top-8 states
+Largest cells:
+ Interval   Manufacturer   Product State  Units
+ 2024-06 Valley Central   Premium    FL   1019
+ 2025-06 Valley Central Top Shelf    FL    997
+ 2026-06 Valley Central Top Shelf    FL    990
+ 2021-06 Valley Central      Rail    FL    927
+ 2021-06 Valley Central   Premium    FL    917
+Zeros by manufacturer: {'Barefoot': 1542, 'Cornfield': 249, 'Neptune': 95, 'Valley Central': 49}
+Zeros by product: {'Call': 1190, 'Top Shelf': 298, 'Rail': 271, 'Premium': 176}
+Smallest blocks:
+ Interval Manufacturer Product  observed  implied
+ 2026-01     Barefoot    Call      11.0     16.0
+ 2025-11     Barefoot    Call      21.0     24.0
+ 2025-12     Barefoot    Call      22.0     25.0
+ 2026-02     Barefoot    Call      22.0     25.0
+ 2025-10     Barefoot    Call      26.0     29.0
+Cell-level Jun-25 vs Jun-24 growth: 11 infinite, 5 undefined (0/0); top 10 finite growth cells all Barefoot: True
+Manufacturer  Product    State
+Barefoot      Rail       AZ       500.0
+                         ID       500.0
+                         ND       500.0
+                         CO       400.0
+                         KY       400.0
+                         MT       400.0
+              Top Shelf  RI       400.0
+                         UT       400.0
+              Rail       AR       367.0
+                         MD       367.0
+
+Done. Figures -> reports/figures | tables -> reports/tables
