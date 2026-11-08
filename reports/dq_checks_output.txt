@@ -1,0 +1,14 @@
+[PASS] Expected columns                           Interval, Manufacturer, Product, State, Units
+[PASS] No blank values                            0 blank cells
+[PASS] Units are non-negative integers            0 bad values
+[PASS] Unique keys                                0 duplicate key rows
+[PASS] Interval format YYYY-MM                    0 malformed
+[PASS] No missing months                          2020-01 to 2026-06, gaps: none
+[PASS] Complete grid (every combination present)  63,648 rows vs 63,648 combinations {'Interval': 78, 'Manufacturer': 4, 'Product': 4, 'State': 51}
+[WARN] Latest year complete                       data ends 2026-06: compare the latest year to date with the same months a year earlier
+[WARN] Zero cells                                 1,935 cells are 0 (3.0%); confirm 0 means none sold, not missing
+[WARN] Blocks under 50 units                      14 brand × tier × month blocks; suppress or pool them before quoting growth (e.g. 2026-01 / Barefoot / Call, 2025-11 / Barefoot / Call, 2025-12 / Barefoot / Call)
+[WARN] Brand share moves of 2+ points in a month  11 moves: Barefoot 2020-04 (+3.0), Barefoot 2021-01 (-3.0), Barefoot 2021-02 (-3.0), Barefoot 2021-03 (-2.0), Barefoot 2021-07 (-3.0), Barefoot 2021-12 (+3.0)
+[WARN] State shares vary over time                largest monthly std of a state's share: 0.011 pts (states are a fixed allocation; no geographic signal)
+
+12 checks: 7 pass, 5 warn, 0 fail

@@ -134,11 +134,96 @@ The tier names follow bar vocabulary (rail < call < premium < top shelf), which 
    - alerts when a share moves more than N points in a month.
 7. **Dashboard design:** KPI tiles for YTD units, YoY %, share, and share change in points. Show rolling-12 trend lines for share and tier mix, a seasonality-aware month-vs-same-month-last-year chart, and suppression notes on any cut below the volume threshold.
 
-## 6. Reproduce
+## 6. Follow-up analysis: answers from the data
+
+`analysis/further_analysis.py` and `analysis/dq_checks.py` answer the analysis questions in section 5 that the file itself can answer. Their output is in `reports/further_analysis_output.txt` and `reports/dq_checks_output.txt`.
+
+### Share-shift monitor (rolling 12 months to Jun 2026 vs the 12 before; market +2.3%)
+
+| Brand | Units (R12) | Change | Market effect | Share effect | Share | Share change |
+|---|---:|---:|---:|---:|---:|---:|
+| Valley Central | 102,681 | +4,854 | +2,278 | +2,576 | 44.0% | +1.1 pts |
+| Neptune | 76,060 | +7,922 | +1,587 | +6,335 | 32.6% | **+2.7 pts** |
+| Cornfield | 41,349 | −2,528 | +1,022 | −3,550 | 17.7% | −1.5 pts |
+| Barefoot | 13,284 | −4,937 | +424 | −5,361 | 5.7% | −2.3 pts |
+
+- Neptune has the momentum: 80% of its gain is share, not market growth.
+- Cornfield and Barefoot lost share even though the market grew.
+- The monthly series is in `reports/tables/r12_share_shift_monitor.csv`.
+
+### Who took share from whom
+
+Method: each month, every brand's share gain is allocated to the losing brands in proportion to their losses (`reports/tables/brand_share_flows.csv`).
+- **The brands churn a lot but net out small.** Gross movement adds up to ~126 share points over 77 months. The largest net transfer between any pair is 4.3 points.
+- **70% of all movement involves Barefoot.** Net over Jan 2020 – Jun 2026:
+  - Valley Central took 4.3 pts from Barefoot.
+  - Neptune took 4.3 pts from Cornfield but lost 3.2 pts to Barefoot.
+  - Cornfield took 2.9 pts from Barefoot.
+- **Caveat:** the three big brands move independently and Barefoot is the plug, so these flows describe how the data was generated, not customers switching. With real data, use switching or trade-in data to answer this properly.
+
+### Tier migration
+
+- Since Call's peak (May 2022, 21.9%), Call lost 16.1 points and Top Shelf gained 17.0. Rail moved +1.1 and Premium −2.0.
+- Allocating monthly moves, Call's net losses went 7.1 pts to Top Shelf, 5.2 to Premium and 3.8 to Rail. Over the full period Premium in turn lost a net 9.7 pts to Top Shelf.
+- **The mix traded up.** Top Shelf behaves as the tier plug, so the same generator caveat applies (`reports/tables/tier_share_flows.csv`).
+
+### Forecasting: what works, and the 2026 outlook
+
+- **Market total:** the seasonal curve forecasts Jul–Dec from Jan–Jun with **0.03–0.09% error** (MAPE, 2021–2025 backtests). "Same month last year" misses by 3.8–8.4%.
+- **Brand share:** in a rolling backtest from 2022, carrying the last value forward beats a 12-month linear trend at every horizon. It only ties the 12-month average at one year:
+
+| Horizon | Last value | 12-month average | 12-month linear trend |
+|---|---:|---:|---:|
+| 1 month | **0.72 pts** | 1.28 | 0.80 |
+| 3 months | **1.21** | 1.50 | 1.40 |
+| 6 months | **1.58** | 1.80 | 2.02 |
+| 12 months | 2.22 | **2.17** | 3.35 |
+
+  Don't extrapolate share trends here: monthly share changes have no momentum.
+
+- **2026 forecast:** full year **≈ 231,992 units, −1.3% vs 2025** (H1 actual 125,278 + H2 forecast 106,714). Jul–Dec by month: 30,167 · 27,839 · 18,557 · 13,920 · 9,276 · 6,956.
+- Brand Jul–Dec units at June shares, with an 80% band for the December share from past six-month moves:
+  - Valley Central 47,731 (44.7%, band 42.7–47.8%)
+  - Neptune 35,238 (33.0%, 31.0–36.0%)
+  - Cornfield 19,210 (18.0%, 15.0–20.0%)
+  - Barefoot 4,535 (4.2%, 0.2–9.2%)
+
+  The full table is in `reports/tables/forecast_h2_2026.csv`.
+
+### Data-quality guards
+
+`analysis/dq_checks.py` runs 12 checks and exits non-zero on any failure, so it can gate a pipeline. On this file: **7 pass, 5 warn, 0 fail**. The warnings are:
+- partial latest year;
+- 1,935 zero cells;
+- 14 brand × tier × month blocks under 50 units;
+- 11 monthly share moves of 2+ points (all Barefoot);
+- state shares that never move.
+
+### What still needs the data owner
+
+These can't be answered from the file:
+- what a unit is;
+- whether Barefoot is a real brand;
+- whether tiers are price bands;
+- whether real geography varies.
+
+## 7. Dashboards
+
+- **HTML:** `dashboard/index.html` is one file with the data embedded. Open it in a browser; the charts load Chart.js from jsDelivr, so they need a connection.
+  - Filters: period, brands, tiers, states/regions, time grain, and a minimum-volume threshold for growth rates.
+  - Contents: KPI tiles, a share ladder, brand and tier trends, a market vs share split, seasonality, the 2026 forecast, and sortable brand × tier and state tables with copy-to-CSV.
+  - A warnings row flags the traps that apply to the current selection.
+  - Rebuild it with `python analysis/build_dashboard.py`.
+- **Tableau Public:** `tableau/market_share_tableau.csv` (the data plus helper columns, including units a year earlier) and `tableau/BUILD_GUIDE.md` (calculated fields, sheets, layout, and the numbers to check against).
+
+## 8. Reproduce
 
 ```bash
 pip install pandas numpy matplotlib
-python analysis/eda.py                # writes reports/figures/*.png and reports/tables/*.csv
+python analysis/eda.py                # EDA figures and tables
+python analysis/further_analysis.py   # share-shift monitor, flows, backtests, 2026 forecast
+python analysis/dq_checks.py          # data-quality guards (non-zero exit on failure)
+python analysis/build_dashboard.py    # dashboard/index.html and tableau/market_share_tableau.csv
 ```
 
 | Output | Contents |
@@ -150,3 +235,7 @@ python analysis/eda.py                # writes reports/figures/*.png and reports
 | `reports/tables/product_share_monthly.csv` | Monthly tier mix |
 | `reports/tables/state_weights.csv` | Fixed state allocation |
 | `reports/tables/block_rounding.csv` | Observed vs implied block totals (rounding loss) |
+| `reports/tables/r12_share_shift_monitor.csv` | Rolling-12 market vs share effect by brand, every month |
+| `reports/tables/brand_share_flows.csv`, `tier_share_flows.csv` | Gross share flows between brands and between tiers |
+| `reports/tables/backtest_market.csv`, `backtest_share.csv` | Forecast backtest errors |
+| `reports/tables/forecast_h2_2026.csv` | Jul–Dec 2026 forecast by brand with 80% share bands |

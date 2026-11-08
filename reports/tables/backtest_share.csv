@@ -1,0 +1,17 @@
+h,mfr,linear_trend_12m,mean_last_12m,naive_last_value
+1,Barefoot,1.11,1.922,0.977
+1,Cornfield,0.721,0.983,0.651
+1,Neptune,0.678,1.314,0.636
+1,Valley Central,0.675,0.917,0.616
+3,Barefoot,2.061,2.299,1.736
+3,Cornfield,1.246,1.077,1.129
+3,Neptune,1.297,1.586,1.164
+3,Valley Central,1.007,1.049,0.83
+6,Barefoot,3.007,2.717,2.248
+6,Cornfield,1.61,1.269,1.334
+6,Neptune,2.006,1.902,1.57
+6,Valley Central,1.474,1.292,1.153
+12,Barefoot,5.771,3.061,3.395
+12,Cornfield,1.813,1.683,1.438
+12,Neptune,3.797,2.12,2.404
+12,Valley Central,2.037,1.823,1.654
