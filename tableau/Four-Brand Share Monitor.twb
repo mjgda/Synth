@@ -1,0 +1,1336 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20191.19.0213.2333                               -->
+<workbook original-version='18.1' source-build='2019.1.0 (20191.19.0213.2333)' source-platform='win' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <SheetIdentifierTracking />
+    <WindowsPersistSimpleIdentifiers />
+  </document-format-change-manifest>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource hasconnection='false' inline='true' name='Parameters' version='18.1'>
+      <aliases enabled='yes' />
+      <column caption='Min Units' datatype='integer' name='[Parameter 1]' param-domain-type='range' role='measure' type='quantitative' value='50'>
+        <calculation class='tableau' formula='50' />
+        <range granularity='10' max='500' min='0' />
+      </column>
+    </datasource>
+    <datasource caption='market_share_tableau' inline='true' name='federated.0mk7shr4m0n1t0r5yn7h3t1c00' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='market_share_tableau' name='textscan.1mk7shr4c5v0000000000000000'>
+            <connection class='textscan' directory='Data/market_share' filename='market_share_tableau.csv' password='' server='' />
+          </named-connection>
+        </named-connections>
+        <relation connection='textscan.1mk7shr4c5v0000000000000000' name='market_share_tableau.csv' table='[market_share_tableau#csv]' type='table'>
+          <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+            <column datatype='date' name='Month Date' ordinal='0' />
+            <column datatype='string' name='Interval' ordinal='1' />
+            <column datatype='integer' name='Year' ordinal='2' />
+            <column datatype='integer' name='Month Num' ordinal='3' />
+            <column datatype='string' name='Half' ordinal='4' />
+            <column datatype='string' name='Partial Year' ordinal='5' />
+            <column datatype='string' name='Manufacturer' ordinal='6' />
+            <column datatype='integer' name='Brand Order' ordinal='7' />
+            <column datatype='string' name='Product' ordinal='8' />
+            <column datatype='integer' name='Tier Order' ordinal='9' />
+            <column datatype='string' name='State' ordinal='10' />
+            <column datatype='string' name='Region' ordinal='11' />
+            <column datatype='integer' name='Units' ordinal='12' />
+            <column datatype='integer' name='Units Year Earlier' ordinal='13' />
+          </columns>
+        </relation>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[market_share_tableau.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Month Date</remote-name>
+            <remote-type>133</remote-type>
+            <local-name>[Month Date]</local-name>
+            <parent-name>[market_share_tableau.csv]</parent-name>
+            <remote-alias>Month Date</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Interval</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Interval]</local-name>
+            <parent-name>[market_share_tableau.csv]</parent-name>
+            <remote-alias>Interval</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Year</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Year]</local-name>
+            <parent-name>[market_share_tableau.csv]</parent-name>
+            <remote-alias>Year</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Month Num</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Month Num]</local-name>
+            <parent-name>[market_share_tableau.csv]</parent-name>
+            <remote-alias>Month Num</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Half</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Half]</local-name>
+            <parent-name>[market_share_tableau.csv]</parent-name>
+            <remote-alias>Half</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Partial Year</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Partial Year]</local-name>
+            <parent-name>[market_share_tableau.csv]</parent-name>
+            <remote-alias>Partial Year</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Manufacturer</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Manufacturer]</local-name>
+            <parent-name>[market_share_tableau.csv]</parent-name>
+            <remote-alias>Manufacturer</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Brand Order</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Brand Order]</local-name>
+            <parent-name>[market_share_tableau.csv]</parent-name>
+            <remote-alias>Brand Order</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Product</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Product]</local-name>
+            <parent-name>[market_share_tableau.csv]</parent-name>
+            <remote-alias>Product</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Tier Order</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Tier Order]</local-name>
+            <parent-name>[market_share_tableau.csv]</parent-name>
+            <remote-alias>Tier Order</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>State</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[State]</local-name>
+            <parent-name>[market_share_tableau.csv]</parent-name>
+            <remote-alias>State</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Region</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Region]</local-name>
+            <parent-name>[market_share_tableau.csv]</parent-name>
+            <remote-alias>Region</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Units</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Units]</local-name>
+            <parent-name>[market_share_tableau.csv]</parent-name>
+            <remote-alias>Units</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Units Year Earlier</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Units Year Earlier]</local-name>
+            <parent-name>[market_share_tableau.csv]</parent-name>
+            <remote-alias>Units Year Earlier</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column datatype='date' name='[Month Date]' role='dimension' type='ordinal' />
+      <column datatype='string' name='[Interval]' role='dimension' type='nominal' />
+      <column datatype='integer' name='[Year]' role='dimension' type='ordinal' />
+      <column datatype='integer' name='[Month Num]' role='dimension' type='ordinal' />
+      <column datatype='string' name='[Half]' role='dimension' type='nominal' />
+      <column datatype='string' name='[Partial Year]' role='dimension' type='nominal' />
+      <column datatype='string' name='[Manufacturer]' role='dimension' type='nominal' />
+      <column datatype='integer' name='[Brand Order]' role='dimension' type='ordinal' />
+      <column datatype='string' name='[Product]' role='dimension' type='nominal' />
+      <column datatype='integer' name='[Tier Order]' role='dimension' type='ordinal' />
+      <column datatype='string' name='[State]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
+      <column datatype='string' name='[Region]' role='dimension' type='nominal' />
+      <column datatype='integer' name='[Units]' role='measure' type='quantitative' />
+      <column datatype='integer' name='[Units Year Earlier]' role='measure' type='quantitative' />
+      <column caption='Units (comparable)' datatype='integer' name='[Calculation_7310000000000000012]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='IF NOT ISNULL([Units Year Earlier]) THEN [Units] END' />
+      </column>
+      <column caption='Market Units (all brands)' datatype='integer' name='[Calculation_7310000000000000001]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='{FIXED [Month Date], [Product], [State] : SUM([Units])}' />
+      </column>
+      <column caption='Market Units Year Earlier' datatype='integer' name='[Calculation_7310000000000000002]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='{FIXED [Month Date], [Product], [State] : SUM([Units Year Earlier])}' />
+      </column>
+      <column caption='Market Units (comparable)' datatype='integer' name='[Calculation_7310000000000000013]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='IF NOT ISNULL([Units Year Earlier]) THEN [Calculation_7310000000000000001] END' />
+      </column>
+      <column caption='Units All Tiers' datatype='integer' name='[Calculation_7310000000000000003]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='{FIXED [Month Date], [Manufacturer], [State] : SUM([Units])}' />
+      </column>
+      <column caption='Brand Share' datatype='real' default-format='p0.0%' name='[Calculation_7310000000000000004]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM([Units]) / SUM([Calculation_7310000000000000001])' />
+      </column>
+      <column caption='Tier Share' datatype='real' default-format='p0.0%' name='[Calculation_7310000000000000005]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM([Units]) / SUM([Calculation_7310000000000000003])' />
+      </column>
+      <column caption='Units Change %' datatype='real' default-format='p0.0%' name='[Calculation_7310000000000000006]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='IF SUM([Units Year Earlier]) &gt; 0 THEN SUM([Calculation_7310000000000000012]) / SUM([Units Year Earlier]) - 1 END' />
+      </column>
+      <column caption='Low Volume' datatype='boolean' name='[Calculation_7310000000000000007]' role='measure' type='nominal'>
+        <calculation class='tableau' formula='SUM([Calculation_7310000000000000012]) &lt; [Parameters].[Parameter 1] OR SUM([Units Year Earlier]) &lt; [Parameters].[Parameter 1]' />
+      </column>
+      <column caption='Units Change % (safe)' datatype='real' default-format='p0.0%' name='[Calculation_7310000000000000008]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='IF NOT [Calculation_7310000000000000007] THEN [Calculation_7310000000000000006] END' />
+      </column>
+      <column caption='Market Effect' datatype='real' default-format='n#,##0' name='[Calculation_7310000000000000009]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='(SUM([Calculation_7310000000000000013]) - SUM([Calculation_7310000000000000002])) * SUM([Units Year Earlier]) / SUM([Calculation_7310000000000000002])' />
+      </column>
+      <column caption='Share Effect' datatype='real' default-format='n#,##0' name='[Calculation_7310000000000000010]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM([Calculation_7310000000000000013]) * (SUM([Calculation_7310000000000000012]) / SUM([Calculation_7310000000000000013]) - SUM([Units Year Earlier]) / SUM([Calculation_7310000000000000002]))' />
+      </column>
+      <column caption='Share Change (pts)' datatype='real' default-format='p0.0%' name='[Calculation_7310000000000000011]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM([Calculation_7310000000000000012]) / SUM([Calculation_7310000000000000013]) - SUM([Units Year Earlier]) / SUM([Calculation_7310000000000000002])' />
+      </column>
+      <layout dim-ordering='alphabetic' dim-percentage='0.5' measure-ordering='alphabetic' measure-percentage='0.4' show-structure='true' />
+      <style>
+        <style-rule element='mark'>
+          <encoding attr='color' field='[none:Manufacturer:nk]' type='palette'>
+            <map to='#2a78d6'>
+              <bucket>&quot;Valley Central&quot;</bucket>
+            </map>
+            <map to='#eb6834'>
+              <bucket>&quot;Neptune&quot;</bucket>
+            </map>
+            <map to='#1baf7a'>
+              <bucket>&quot;Cornfield&quot;</bucket>
+            </map>
+            <map to='#eda100'>
+              <bucket>&quot;Barefoot&quot;</bucket>
+            </map>
+          </encoding>
+          <encoding attr='color' field='[none:Product:nk]' type='palette'>
+            <map to='#e87ba4'>
+              <bucket>&quot;Rail&quot;</bucket>
+            </map>
+            <map to='#008300'>
+              <bucket>&quot;Call&quot;</bucket>
+            </map>
+            <map to='#6250d6'>
+              <bucket>&quot;Premium&quot;</bucket>
+            </map>
+            <map to='#e34948'>
+              <bucket>&quot;Top Shelf&quot;</bucket>
+            </map>
+          </encoding>
+        </style-rule>
+      </style>
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+    </datasource>
+  </datasources>
+  <mapsources>
+    <mapsource name='Tableau' />
+  </mapsources>
+  <worksheets>
+    <worksheet name='KPI Units'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true'>Units (selected period)</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='market_share_tableau' name='federated.0mk7shr4m0n1t0r5yn7h3t1c00' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0mk7shr4m0n1t0r5yn7h3t1c00'>
+            <column datatype='string' name='[Manufacturer]' role='dimension' type='nominal' />
+            <column datatype='date' name='[Month Date]' role='dimension' type='ordinal' />
+            <column datatype='string' name='[Product]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Region]' role='dimension' type='nominal' />
+            <column datatype='string' name='[State]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
+            <column datatype='integer' name='[Units]' role='measure' type='quantitative' />
+            <column-instance column='[Units]' derivation='Sum' name='[sum:Units:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Month Date]' derivation='None' name='[none:Month Date:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Manufacturer]' derivation='None' name='[none:Manufacturer:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Product]' derivation='None' name='[none:Product:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Region]' derivation='None' name='[none:Region:nk]' pivot='key' type='nominal' />
+            <column-instance column='[State]' derivation='None' name='[none:State:nk]' pivot='key' type='nominal' />
+          </datasource-dependencies>
+          <filter class='quantitative' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Month Date:qk]' filter-group='2' included-values='in-range'>
+            <min>#2020-01-01#</min>
+            <max>#2026-06-01#</max>
+          </filter>
+          <filter class='categorical' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Manufacturer:nk]' filter-group='3'>
+            <groupfilter function='level-members' level='[none:Manufacturer:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Product:nk]' filter-group='4'>
+            <groupfilter function='level-members' level='[none:Product:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Region:nk]' filter-group='5'>
+            <groupfilter function='level-members' level='[none:Region:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:State:nk]' filter-group='6'>
+            <groupfilter function='level-members' level='[none:State:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Month Date:qk]</column>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Manufacturer:nk]</column>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Product:nk]</column>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Region:nk]</column>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:State:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Text' />
+            <encodings>
+              <text column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[sum:Units:qk]' />
+            </encodings>
+            <customized-label>
+              <formatted-text>
+                <run fontsize='26'>&lt;</run>
+                <run fontsize='26'>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[sum:Units:qk]</run>
+                <run fontsize='26'>&gt;</run>
+              </formatted-text>
+            </customized-label>
+            <style>
+              <style-rule element='cell'>
+                <format attr='text-align' value='center' />
+              </style-rule>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+      <simple-id uuid='{3B169972-D52B-4DF3-A6BE-6D041626E018}' />
+    </worksheet>
+    <worksheet name='KPI Change'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true'>Change vs the same months a year earlier (2021 onward)</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='market_share_tableau' name='federated.0mk7shr4m0n1t0r5yn7h3t1c00' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0mk7shr4m0n1t0r5yn7h3t1c00'>
+            <column datatype='string' name='[Manufacturer]' role='dimension' type='nominal' />
+            <column datatype='date' name='[Month Date]' role='dimension' type='ordinal' />
+            <column datatype='string' name='[Product]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Region]' role='dimension' type='nominal' />
+            <column datatype='string' name='[State]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
+            <column datatype='integer' name='[Units]' role='measure' type='quantitative' />
+            <column datatype='integer' name='[Units Year Earlier]' role='measure' type='quantitative' />
+            <column caption='Units (comparable)' datatype='integer' name='[Calculation_7310000000000000012]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='IF NOT ISNULL([Units Year Earlier]) THEN [Units] END' />
+            </column>
+            <column caption='Units Change %' datatype='real' default-format='p0.0%' name='[Calculation_7310000000000000006]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='IF SUM([Units Year Earlier]) &gt; 0 THEN SUM([Calculation_7310000000000000012]) / SUM([Units Year Earlier]) - 1 END' />
+            </column>
+            <column-instance column='[Calculation_7310000000000000006]' derivation='User' name='[usr:Calculation_7310000000000000006:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Month Date]' derivation='None' name='[none:Month Date:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Manufacturer]' derivation='None' name='[none:Manufacturer:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Product]' derivation='None' name='[none:Product:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Region]' derivation='None' name='[none:Region:nk]' pivot='key' type='nominal' />
+            <column-instance column='[State]' derivation='None' name='[none:State:nk]' pivot='key' type='nominal' />
+          </datasource-dependencies>
+          <filter class='quantitative' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Month Date:qk]' filter-group='2' included-values='in-range'>
+            <min>#2020-01-01#</min>
+            <max>#2026-06-01#</max>
+          </filter>
+          <filter class='categorical' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Manufacturer:nk]' filter-group='3'>
+            <groupfilter function='level-members' level='[none:Manufacturer:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Product:nk]' filter-group='4'>
+            <groupfilter function='level-members' level='[none:Product:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Region:nk]' filter-group='5'>
+            <groupfilter function='level-members' level='[none:Region:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:State:nk]' filter-group='6'>
+            <groupfilter function='level-members' level='[none:State:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Month Date:qk]</column>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Manufacturer:nk]</column>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Product:nk]</column>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Region:nk]</column>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:State:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Text' />
+            <encodings>
+              <text column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[usr:Calculation_7310000000000000006:qk]' />
+            </encodings>
+            <customized-label>
+              <formatted-text>
+                <run fontsize='26'>&lt;</run>
+                <run fontsize='26'>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[usr:Calculation_7310000000000000006:qk]</run>
+                <run fontsize='26'>&gt;</run>
+              </formatted-text>
+            </customized-label>
+            <style>
+              <style-rule element='cell'>
+                <format attr='text-align' value='center' />
+              </style-rule>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+      <simple-id uuid='{4D870823-B2DA-46AF-A66D-23F12E09517D}' />
+    </worksheet>
+    <worksheet name='Brand Share'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true'>Brand share of units (all four brands = 100%)</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='market_share_tableau' name='federated.0mk7shr4m0n1t0r5yn7h3t1c00' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0mk7shr4m0n1t0r5yn7h3t1c00'>
+            <column datatype='string' name='[Manufacturer]' role='dimension' type='nominal' />
+            <column datatype='date' name='[Month Date]' role='dimension' type='ordinal' />
+            <column datatype='string' name='[Product]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Region]' role='dimension' type='nominal' />
+            <column datatype='string' name='[State]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
+            <column datatype='integer' name='[Units]' role='measure' type='quantitative' />
+            <column caption='Market Units (all brands)' datatype='integer' name='[Calculation_7310000000000000001]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='{FIXED [Month Date], [Product], [State] : SUM([Units])}' />
+            </column>
+            <column caption='Brand Share' datatype='real' default-format='p0.0%' name='[Calculation_7310000000000000004]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM([Units]) / SUM([Calculation_7310000000000000001])' />
+            </column>
+            <column-instance column='[Calculation_7310000000000000004]' derivation='User' name='[usr:Calculation_7310000000000000004:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Month Date]' derivation='Month-Trunc' name='[tmn:Month Date:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Manufacturer]' derivation='None' name='[none:Manufacturer:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Month Date]' derivation='None' name='[none:Month Date:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Product]' derivation='None' name='[none:Product:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Region]' derivation='None' name='[none:Region:nk]' pivot='key' type='nominal' />
+            <column-instance column='[State]' derivation='None' name='[none:State:nk]' pivot='key' type='nominal' />
+          </datasource-dependencies>
+          <filter class='quantitative' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Month Date:qk]' filter-group='2' included-values='in-range'>
+            <min>#2020-01-01#</min>
+            <max>#2026-06-01#</max>
+          </filter>
+          <filter class='categorical' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Manufacturer:nk]' filter-group='3'>
+            <groupfilter function='level-members' level='[none:Manufacturer:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Product:nk]' filter-group='4'>
+            <groupfilter function='level-members' level='[none:Product:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Region:nk]' filter-group='5'>
+            <groupfilter function='level-members' level='[none:Region:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:State:nk]' filter-group='6'>
+            <groupfilter function='level-members' level='[none:State:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Month Date:qk]</column>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Manufacturer:nk]</column>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Product:nk]</column>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Region:nk]</column>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:State:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Line' />
+            <encodings>
+              <color column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Manufacturer:nk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[usr:Calculation_7310000000000000004:qk]</rows>
+        <cols>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[tmn:Month Date:qk]</cols>
+      </table>
+      <simple-id uuid='{677C6CDA-37E5-41EF-95A7-345B97C11F06}' />
+    </worksheet>
+    <worksheet name='Tier Mix'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true'>Tier mix of units</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='market_share_tableau' name='federated.0mk7shr4m0n1t0r5yn7h3t1c00' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0mk7shr4m0n1t0r5yn7h3t1c00'>
+            <column datatype='string' name='[Manufacturer]' role='dimension' type='nominal' />
+            <column datatype='date' name='[Month Date]' role='dimension' type='ordinal' />
+            <column datatype='string' name='[Product]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Region]' role='dimension' type='nominal' />
+            <column datatype='string' name='[State]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
+            <column datatype='integer' name='[Units]' role='measure' type='quantitative' />
+            <column caption='Units All Tiers' datatype='integer' name='[Calculation_7310000000000000003]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='{FIXED [Month Date], [Manufacturer], [State] : SUM([Units])}' />
+            </column>
+            <column caption='Tier Share' datatype='real' default-format='p0.0%' name='[Calculation_7310000000000000005]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM([Units]) / SUM([Calculation_7310000000000000003])' />
+            </column>
+            <column-instance column='[Calculation_7310000000000000005]' derivation='User' name='[usr:Calculation_7310000000000000005:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Month Date]' derivation='Month-Trunc' name='[tmn:Month Date:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Product]' derivation='None' name='[none:Product:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Month Date]' derivation='None' name='[none:Month Date:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Manufacturer]' derivation='None' name='[none:Manufacturer:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Region]' derivation='None' name='[none:Region:nk]' pivot='key' type='nominal' />
+            <column-instance column='[State]' derivation='None' name='[none:State:nk]' pivot='key' type='nominal' />
+          </datasource-dependencies>
+          <filter class='quantitative' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Month Date:qk]' filter-group='2' included-values='in-range'>
+            <min>#2020-01-01#</min>
+            <max>#2026-06-01#</max>
+          </filter>
+          <filter class='categorical' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Manufacturer:nk]' filter-group='3'>
+            <groupfilter function='level-members' level='[none:Manufacturer:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Product:nk]' filter-group='4'>
+            <groupfilter function='level-members' level='[none:Product:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Region:nk]' filter-group='5'>
+            <groupfilter function='level-members' level='[none:Region:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:State:nk]' filter-group='6'>
+            <groupfilter function='level-members' level='[none:State:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Month Date:qk]</column>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Manufacturer:nk]</column>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Product:nk]</column>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Region:nk]</column>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:State:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Line' />
+            <encodings>
+              <color column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Product:nk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[usr:Calculation_7310000000000000005:qk]</rows>
+        <cols>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[tmn:Month Date:qk]</cols>
+      </table>
+      <simple-id uuid='{FE1F870D-F804-49B0-8C62-D2A9A0AECBF6}' />
+    </worksheet>
+    <worksheet name='Change Drivers'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true'>What drove the change: market size vs share (vs a year earlier)</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='market_share_tableau' name='federated.0mk7shr4m0n1t0r5yn7h3t1c00' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0mk7shr4m0n1t0r5yn7h3t1c00'>
+            <column datatype='string' name='[Manufacturer]' role='dimension' type='nominal' />
+            <column datatype='date' name='[Month Date]' role='dimension' type='ordinal' />
+            <column datatype='string' name='[Product]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Region]' role='dimension' type='nominal' />
+            <column datatype='string' name='[State]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
+            <column datatype='integer' name='[Units]' role='measure' type='quantitative' />
+            <column datatype='integer' name='[Units Year Earlier]' role='measure' type='quantitative' />
+            <column caption='Units (comparable)' datatype='integer' name='[Calculation_7310000000000000012]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='IF NOT ISNULL([Units Year Earlier]) THEN [Units] END' />
+            </column>
+            <column caption='Market Units (all brands)' datatype='integer' name='[Calculation_7310000000000000001]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='{FIXED [Month Date], [Product], [State] : SUM([Units])}' />
+            </column>
+            <column caption='Market Units Year Earlier' datatype='integer' name='[Calculation_7310000000000000002]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='{FIXED [Month Date], [Product], [State] : SUM([Units Year Earlier])}' />
+            </column>
+            <column caption='Market Units (comparable)' datatype='integer' name='[Calculation_7310000000000000013]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='IF NOT ISNULL([Units Year Earlier]) THEN [Calculation_7310000000000000001] END' />
+            </column>
+            <column caption='Market Effect' datatype='real' default-format='n#,##0' name='[Calculation_7310000000000000009]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='(SUM([Calculation_7310000000000000013]) - SUM([Calculation_7310000000000000002])) * SUM([Units Year Earlier]) / SUM([Calculation_7310000000000000002])' />
+            </column>
+            <column caption='Share Effect' datatype='real' default-format='n#,##0' name='[Calculation_7310000000000000010]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM([Calculation_7310000000000000013]) * (SUM([Calculation_7310000000000000012]) / SUM([Calculation_7310000000000000013]) - SUM([Units Year Earlier]) / SUM([Calculation_7310000000000000002]))' />
+            </column>
+            <column-instance column='[Manufacturer]' derivation='None' name='[none:Manufacturer:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Calculation_7310000000000000009]' derivation='User' name='[usr:Calculation_7310000000000000009:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_7310000000000000010]' derivation='User' name='[usr:Calculation_7310000000000000010:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Month Date]' derivation='None' name='[none:Month Date:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Product]' derivation='None' name='[none:Product:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Region]' derivation='None' name='[none:Region:nk]' pivot='key' type='nominal' />
+            <column-instance column='[State]' derivation='None' name='[none:State:nk]' pivot='key' type='nominal' />
+          </datasource-dependencies>
+          <filter class='quantitative' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Month Date:qk]' filter-group='2' included-values='in-range'>
+            <min>#2020-01-01#</min>
+            <max>#2026-06-01#</max>
+          </filter>
+          <filter class='categorical' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Manufacturer:nk]' filter-group='3'>
+            <groupfilter function='level-members' level='[none:Manufacturer:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Product:nk]' filter-group='4'>
+            <groupfilter function='level-members' level='[none:Product:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Region:nk]' filter-group='5'>
+            <groupfilter function='level-members' level='[none:Region:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:State:nk]' filter-group='6'>
+            <groupfilter function='level-members' level='[none:State:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Month Date:qk]</column>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Manufacturer:nk]</column>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Product:nk]</column>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Region:nk]</column>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:State:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+            <encodings>
+              <color column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Manufacturer:nk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Manufacturer:nk]</rows>
+        <cols>([federated.0mk7shr4m0n1t0r5yn7h3t1c00].[usr:Calculation_7310000000000000009:qk] + [federated.0mk7shr4m0n1t0r5yn7h3t1c00].[usr:Calculation_7310000000000000010:qk])</cols>
+      </table>
+      <simple-id uuid='{3912240C-7A72-43FC-A177-8573466AE31D}' />
+    </worksheet>
+    <worksheet name='Seasonality'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true'>Seasonal curve by year</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='market_share_tableau' name='federated.0mk7shr4m0n1t0r5yn7h3t1c00' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0mk7shr4m0n1t0r5yn7h3t1c00'>
+            <column datatype='string' name='[Manufacturer]' role='dimension' type='nominal' />
+            <column datatype='date' name='[Month Date]' role='dimension' type='ordinal' />
+            <column datatype='string' name='[Product]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Region]' role='dimension' type='nominal' />
+            <column datatype='string' name='[State]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
+            <column datatype='integer' name='[Units]' role='measure' type='quantitative' />
+            <column-instance column='[Units]' derivation='Sum' name='[sum:Units:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Month Date]' derivation='Month' name='[mn:Month Date:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[Month Date]' derivation='Year' name='[yr:Month Date:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[Month Date]' derivation='None' name='[none:Month Date:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Manufacturer]' derivation='None' name='[none:Manufacturer:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Product]' derivation='None' name='[none:Product:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Region]' derivation='None' name='[none:Region:nk]' pivot='key' type='nominal' />
+            <column-instance column='[State]' derivation='None' name='[none:State:nk]' pivot='key' type='nominal' />
+          </datasource-dependencies>
+          <filter class='quantitative' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Month Date:qk]' filter-group='2' included-values='in-range'>
+            <min>#2020-01-01#</min>
+            <max>#2026-06-01#</max>
+          </filter>
+          <filter class='categorical' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Manufacturer:nk]' filter-group='3'>
+            <groupfilter function='level-members' level='[none:Manufacturer:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Product:nk]' filter-group='4'>
+            <groupfilter function='level-members' level='[none:Product:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Region:nk]' filter-group='5'>
+            <groupfilter function='level-members' level='[none:Region:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:State:nk]' filter-group='6'>
+            <groupfilter function='level-members' level='[none:State:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Month Date:qk]</column>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Manufacturer:nk]</column>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Product:nk]</column>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Region:nk]</column>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:State:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Line' />
+            <encodings>
+              <color column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[yr:Month Date:ok]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[sum:Units:qk]</rows>
+        <cols>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[mn:Month Date:ok]</cols>
+      </table>
+      <simple-id uuid='{A39ADE24-C871-4FB9-8923-65A60200FDDC}' />
+    </worksheet>
+    <worksheet name='State Map'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true'>Units by state (each state&apos;s slice is fixed in this data)</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='market_share_tableau' name='federated.0mk7shr4m0n1t0r5yn7h3t1c00' />
+          </datasources>
+          <mapsources>
+            <mapsource name='Tableau' />
+          </mapsources>
+          <datasource-dependencies datasource='federated.0mk7shr4m0n1t0r5yn7h3t1c00'>
+            <column datatype='string' name='[Manufacturer]' role='dimension' type='nominal' />
+            <column datatype='date' name='[Month Date]' role='dimension' type='ordinal' />
+            <column datatype='string' name='[Product]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Region]' role='dimension' type='nominal' />
+            <column datatype='string' name='[State]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
+            <column datatype='integer' name='[Units]' role='measure' type='quantitative' />
+            <column-instance column='[Units]' derivation='Sum' name='[sum:Units:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[State]' derivation='None' name='[none:State:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Month Date]' derivation='None' name='[none:Month Date:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Manufacturer]' derivation='None' name='[none:Manufacturer:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Product]' derivation='None' name='[none:Product:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Region]' derivation='None' name='[none:Region:nk]' pivot='key' type='nominal' />
+          </datasource-dependencies>
+          <filter class='quantitative' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[Latitude (generated)]' included-values='non-null' />
+          <filter class='quantitative' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[Longitude (generated)]' included-values='non-null' />
+          <filter class='quantitative' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Month Date:qk]' filter-group='2' included-values='in-range'>
+            <min>#2020-01-01#</min>
+            <max>#2026-06-01#</max>
+          </filter>
+          <filter class='categorical' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Manufacturer:nk]' filter-group='3'>
+            <groupfilter function='level-members' level='[none:Manufacturer:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Product:nk]' filter-group='4'>
+            <groupfilter function='level-members' level='[none:Product:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Region:nk]' filter-group='5'>
+            <groupfilter function='level-members' level='[none:Region:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:State:nk]' filter-group='6'>
+            <groupfilter function='level-members' level='[none:State:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[Longitude (generated)]</column>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[Latitude (generated)]</column>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Month Date:qk]</column>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Manufacturer:nk]</column>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Product:nk]</column>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Region:nk]</column>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:State:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Multipolygon' />
+            <encodings>
+              <color column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[sum:Units:qk]' />
+              <lod column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:State:nk]' />
+              <geometry column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[Geometry (generated)]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[Latitude (generated)]</rows>
+        <cols>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[Longitude (generated)]</cols>
+      </table>
+      <simple-id uuid='{842D5A37-5FC7-4B7A-A115-E8A4D55DA133}' />
+    </worksheet>
+    <worksheet name='Brand x Tier'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true'>Unit change by brand and tier (blank = under Min Units)</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='market_share_tableau' name='federated.0mk7shr4m0n1t0r5yn7h3t1c00' />
+            <datasource name='Parameters' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0mk7shr4m0n1t0r5yn7h3t1c00'>
+            <column datatype='string' name='[Manufacturer]' role='dimension' type='nominal' />
+            <column datatype='date' name='[Month Date]' role='dimension' type='ordinal' />
+            <column datatype='string' name='[Product]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Region]' role='dimension' type='nominal' />
+            <column datatype='string' name='[State]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
+            <column datatype='integer' name='[Units]' role='measure' type='quantitative' />
+            <column datatype='integer' name='[Units Year Earlier]' role='measure' type='quantitative' />
+            <column caption='Units (comparable)' datatype='integer' name='[Calculation_7310000000000000012]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='IF NOT ISNULL([Units Year Earlier]) THEN [Units] END' />
+            </column>
+            <column caption='Units Change %' datatype='real' default-format='p0.0%' name='[Calculation_7310000000000000006]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='IF SUM([Units Year Earlier]) &gt; 0 THEN SUM([Calculation_7310000000000000012]) / SUM([Units Year Earlier]) - 1 END' />
+            </column>
+            <column caption='Low Volume' datatype='boolean' name='[Calculation_7310000000000000007]' role='measure' type='nominal'>
+              <calculation class='tableau' formula='SUM([Calculation_7310000000000000012]) &lt; [Parameters].[Parameter 1] OR SUM([Units Year Earlier]) &lt; [Parameters].[Parameter 1]' />
+            </column>
+            <column caption='Units Change % (safe)' datatype='real' default-format='p0.0%' name='[Calculation_7310000000000000008]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='IF NOT [Calculation_7310000000000000007] THEN [Calculation_7310000000000000006] END' />
+            </column>
+            <column-instance column='[Manufacturer]' derivation='None' name='[none:Manufacturer:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Product]' derivation='None' name='[none:Product:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Calculation_7310000000000000008]' derivation='User' name='[usr:Calculation_7310000000000000008:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Month Date]' derivation='None' name='[none:Month Date:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Region]' derivation='None' name='[none:Region:nk]' pivot='key' type='nominal' />
+            <column-instance column='[State]' derivation='None' name='[none:State:nk]' pivot='key' type='nominal' />
+          </datasource-dependencies>
+          <datasource-dependencies datasource='Parameters'>
+            <column caption='Min Units' datatype='integer' name='[Parameter 1]' param-domain-type='range' role='measure' type='quantitative' value='50'>
+        <calculation class='tableau' formula='50' />
+        <range granularity='10' max='500' min='0' />
+      </column>
+          </datasource-dependencies>
+          <filter class='quantitative' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Month Date:qk]' filter-group='2' included-values='in-range'>
+            <min>#2020-01-01#</min>
+            <max>#2026-06-01#</max>
+          </filter>
+          <filter class='categorical' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Manufacturer:nk]' filter-group='3'>
+            <groupfilter function='level-members' level='[none:Manufacturer:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Product:nk]' filter-group='4'>
+            <groupfilter function='level-members' level='[none:Product:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Region:nk]' filter-group='5'>
+            <groupfilter function='level-members' level='[none:Region:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:State:nk]' filter-group='6'>
+            <groupfilter function='level-members' level='[none:State:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Month Date:qk]</column>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Manufacturer:nk]</column>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Product:nk]</column>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Region:nk]</column>
+            <column>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:State:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='cell'>
+            <format attr='text-format' field='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[usr:Calculation_7310000000000000008:qk]' value='p0.0%' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Text' />
+            <encodings>
+              <text column='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[usr:Calculation_7310000000000000008:qk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Manufacturer:nk]</rows>
+        <cols>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Product:nk]</cols>
+      </table>
+      <simple-id uuid='{0EABC7CA-6D92-4A2C-BDDB-55DF25BEF826}' />
+    </worksheet>
+  </worksheets>
+  <dashboards>
+    <dashboard enable-sort-zone-taborder='true' name='Share Monitor'>
+      <style />
+      <size maxheight='1000' maxwidth='1200' minheight='1000' minwidth='1200' sizing-mode='fixed' />
+      <datasources>
+        <datasource name='Parameters' />
+        <datasource caption='market_share_tableau' name='federated.0mk7shr4m0n1t0r5yn7h3t1c00' />
+      </datasources>
+      <datasource-dependencies datasource='Parameters'>
+        <column caption='Min Units' datatype='integer' name='[Parameter 1]' param-domain-type='range' role='measure' type='quantitative' value='50'>
+        <calculation class='tableau' formula='50' />
+        <range granularity='10' max='500' min='0' />
+      </column>
+      </datasource-dependencies>
+      <datasource-dependencies datasource='federated.0mk7shr4m0n1t0r5yn7h3t1c00'>
+        <column datatype='date' name='[Month Date]' role='dimension' type='ordinal' />
+        <column datatype='string' name='[Manufacturer]' role='dimension' type='nominal' />
+        <column datatype='string' name='[Product]' role='dimension' type='nominal' />
+        <column datatype='string' name='[Region]' role='dimension' type='nominal' />
+        <column datatype='string' name='[State]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
+        <column-instance column='[Month Date]' derivation='None' name='[none:Month Date:qk]' pivot='key' type='quantitative' />
+        <column-instance column='[Manufacturer]' derivation='None' name='[none:Manufacturer:nk]' pivot='key' type='nominal' />
+        <column-instance column='[Product]' derivation='None' name='[none:Product:nk]' pivot='key' type='nominal' />
+        <column-instance column='[Region]' derivation='None' name='[none:Region:nk]' pivot='key' type='nominal' />
+        <column-instance column='[State]' derivation='None' name='[none:State:nk]' pivot='key' type='nominal' />
+      </datasource-dependencies>
+      <zones>
+        <zone h='100000' id='2' type-v2='layout-basic' w='100000' x='0' y='0'>
+          <zone forceUpdate='true' h='6000' id='3' type-v2='text' w='98400' x='800' y='400'>
+            <formatted-text>
+              <run bold='true' fontsize='20'>Four-Brand Share Monitor</run>
+              <run fontsize='10'> Synthetic data, Jan 2020 – Jun 2026. 2026 covers Jan–Jun only: compare it with the same months of 2025.</run>
+            </formatted-text>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone h='6500' id='4' name='Brand Share' param='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Month Date:qk]' type-v2='filter' values='database' w='26000' x='800' y='6800'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone h='6500' id='5' mode='checkdropdown' name='Brand Share' param='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Manufacturer:nk]' type-v2='filter' values='database' w='17000' x='27400' y='6800'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone h='6500' id='6' mode='checkdropdown' name='Brand Share' param='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Product:nk]' type-v2='filter' values='database' w='15000' x='45000' y='6800'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone h='6500' id='7' mode='checkdropdown' name='Brand Share' param='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Region:nk]' type-v2='filter' values='database' w='13000' x='60600' y='6800'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone h='6500' id='8' mode='checkdropdown' name='Brand Share' param='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:State:nk]' type-v2='filter' values='database' w='13000' x='74200' y='6800'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone h='6500' id='9' mode='slider' param='[Parameters].[Parameter 1]' type-v2='paramctrl' w='11400' x='87800' y='6800'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone h='9000' id='10' name='KPI Units' show-title='true' w='24000' x='800' y='13800'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone h='9000' id='11' name='KPI Change' show-title='true' w='24000' x='25400' y='13800'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone forceUpdate='true' h='9000' id='12' type-v2='text' w='49200' x='50000' y='13800'>
+            <formatted-text>
+              <run bold='true' fontsize='11'>How to read this</run>
+              <run fontsize='9'> Brand share is measured against all four brands, so the brand filter hides lines without changing shares. Change figures compare the selected months with the same months a year earlier, so start the date filter in 2021 or later. Barefoot is the remainder brand: read its moves in share points.</run>
+            </formatted-text>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone h='25000' id='13' name='Brand Share' show-title='true' w='48900' x='800' y='23400'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone h='25000' id='14' name='Tier Mix' show-title='true' w='48900' x='50300' y='23400'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone h='24000' id='15' name='Change Drivers' show-title='true' w='32300' x='800' y='49000'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone h='24000' id='16' name='Seasonality' show-title='true' w='32300' x='33800' y='49000'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone h='24000' id='17' name='State Map' show-title='true' w='32400' x='66800' y='49000'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone h='25600' id='18' name='Brand x Tier' show-title='true' w='98400' x='800' y='73600'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+        </zone>
+      </zones>
+      <simple-id uuid='{71FCBB3F-E347-40B5-8C7D-0C8FB1151AC7}' />
+    </dashboard>
+  </dashboards>
+  <windows source-height='30'>
+    <window class='worksheet' name='KPI Units'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{B0D806A9-4C31-4845-903E-7DA92575C73D}' />
+    </window>
+    <window class='worksheet' name='KPI Change'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{4D1D2807-6DC6-45A9-B26E-4EDDD446806F}' />
+    </window>
+    <window class='worksheet' name='Brand Share'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{2FE87031-4090-408B-BB11-202D04C4B61A}' />
+    </window>
+    <window class='worksheet' name='Tier Mix'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{C4A66CF3-7D09-406B-BB1C-C72C102FAACA}' />
+    </window>
+    <window class='worksheet' name='Change Drivers'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{65D47A40-CA88-4E24-83D0-E0F5E92880B5}' />
+    </window>
+    <window class='worksheet' name='Seasonality'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{19801E9B-6E92-48AF-AB81-A4BB81970688}' />
+    </window>
+    <window class='worksheet' name='State Map'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{BB3168DA-ADD4-4BDC-BFD2-24EF5D295934}' />
+    </window>
+    <window class='worksheet' name='Brand x Tier'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{53850208-28E0-448C-A325-859E5CDC3EA1}' />
+    </window>
+    <window class='dashboard' maximized='true' name='Share Monitor'>
+      <viewpoints>
+        <viewpoint name='KPI Units' />
+        <viewpoint name='KPI Change' />
+        <viewpoint name='Brand Share' />
+        <viewpoint name='Tier Mix' />
+        <viewpoint name='Change Drivers' />
+        <viewpoint name='Seasonality' />
+        <viewpoint name='State Map' />
+        <viewpoint name='Brand x Tier' />
+      </viewpoints>
+      <active id='-1' />
+      <simple-id uuid='{E1437C9E-647A-47F8-A893-DA358F711BEF}' />
+    </window>
+  </windows>
+</workbook>

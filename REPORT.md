@@ -214,7 +214,10 @@ These can't be answered from the file:
   - Contents: KPI tiles, a share ladder, brand and tier trends, a market vs share split, seasonality, the 2026 forecast, and sortable brand × tier and state tables with copy-to-CSV.
   - A warnings row flags the traps that apply to the current selection.
   - Rebuild it with `python analysis/build_dashboard.py`.
-- **Tableau Public:** `tableau/market_share_tableau.csv` (the data plus helper columns, including units a year earlier) and `tableau/BUILD_GUIDE.md` (calculated fields, sheets, layout, and the numbers to check against).
+- **Tableau Public:**
+  - `tableau/Four-Brand Share Monitor.twbx` is a generated packaged workbook. It passes structural checks but nobody has opened it in Tableau yet. Rebuild it with `python analysis/build_tableau_workbook.py`.
+  - `tableau/BUILD_GUIDE.md` has the manual build steps, calculated fields, and the numbers to check against.
+  - `tableau/market_share_tableau.csv` is the data plus helper columns, including units a year earlier.
 
 ## 8. Reproduce
 
@@ -224,6 +227,7 @@ python analysis/eda.py                # EDA figures and tables
 python analysis/further_analysis.py   # share-shift monitor, flows, backtests, 2026 forecast
 python analysis/dq_checks.py          # data-quality guards (non-zero exit on failure)
 python analysis/build_dashboard.py    # dashboard/index.html and tableau/market_share_tableau.csv
+python analysis/build_tableau_workbook.py  # tableau/Four-Brand Share Monitor.twbx
 ```
 
 | Output | Contents |
