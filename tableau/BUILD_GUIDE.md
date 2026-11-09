@@ -50,7 +50,7 @@ Then check data types in the data pane:
 
 ## 3. Parameter and calculated fields
 
-**Parameter:** create `Min Units` (Integer, current value 50, range 0–500, step 10). Right-click it → *Show Parameter*.
+**Parameter:** create `Min Units` (Integer, current value 50, range 0–10,000, step 50). Right-click it → *Show Parameter*. It hides a % change when either period has fewer units than the threshold. Across all states and months the smallest brand × tier cell has 9,678 units, so the threshold only matters on small selections, such as one state or a few months.
 
 **Calculated fields** (*Analysis → Create Calculated Field*). Paste each one exactly:
 

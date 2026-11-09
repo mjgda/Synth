@@ -103,10 +103,10 @@ CALC_DEPS = {
     "sh_fx": ["Units Year Earlier", "@units_cmp", "@mkt_cmp", "@mkt_py"],
     "share_chg": ["Units Year Earlier", "@units_cmp", "@mkt_cmp", "@mkt_py"],
 }
-PARAM = ("<column caption='Min Units' datatype='integer' name='[Parameter 1]' param-domain-type='range' "
+PARAM = ("<column caption='Min units for % change' datatype='integer' name='[Parameter 1]' param-domain-type='range' "
          "role='measure' type='quantitative' value='50'>\n"
          "        <calculation class='tableau' formula='50' />\n"
-         "        <range granularity='10' max='500' min='0' />\n"
+         "        <range granularity='50' max='10000' min='0' />\n"
          "      </column>")
 
 
@@ -260,13 +260,13 @@ def worksheet(name: str, title: str, mark: str, rows: str = "", cols: str = "", 
 def build_worksheets() -> tuple[list[str], list[str]]:
     usr = lambda k: q(f"[usr:{C[k]}:qk]")
     sheets = [
-        ("KPI Units", worksheet("KPI Units", "Units (selected period)", "Text",
+        ("KPI Units", worksheet("KPI Units", "Units", "Text",
                                 encodings=[("text", q("[sum:Units:qk]"))], instances=[("sum", "Units")],
                                 big_label=q("[sum:Units:qk]"), caption="Units, selected brands and months")),
-        ("KPI Change", worksheet("KPI Change", "Change vs the same months a year earlier (2021 onward)", "Text",
+        ("KPI Change", worksheet("KPI Change", "Change vs a year earlier", "Text",
                                  encodings=[("text", usr("chg"))], instances=[("usr", "@chg")],
-                                 big_label=usr("chg"), caption="Change vs the same months a year earlier")),
-        ("Brand Share", worksheet("Brand Share", "Brand share of units (all four brands = 100%)", "Line",
+                                 big_label=usr("chg"), caption="Change vs a year earlier")),
+        ("Brand Share", worksheet("Brand Share", "Brand share of units", "Line",
                                   rows=usr("share"), cols=q("[tmn:Month Date:qk]"),
                                   encodings=[("color", q("[none:Manufacturer:nk]"))],
                                   instances=[("usr", "@share"), ("tmn", "Month Date"), ("none_nk", "Manufacturer")])),
@@ -274,7 +274,7 @@ def build_worksheets() -> tuple[list[str], list[str]]:
                                rows=usr("tier_share"), cols=q("[tmn:Month Date:qk]"),
                                encodings=[("color", q("[none:Product:nk]"))],
                                instances=[("usr", "@tier_share"), ("tmn", "Month Date"), ("none_nk", "Product")])),
-        ("Change Drivers", worksheet("Change Drivers", "What drove the change: market size vs share (vs a year earlier)", "Bar",
+        ("Change Drivers", worksheet("Change Drivers", "What drove the change: market size vs share", "Bar",
                                      rows=q("[none:Manufacturer:nk]"), cols=f"({usr('mkt_fx')} + {usr('sh_fx')})",
                                      encodings=[("color", q("[none:Manufacturer:nk]"))],
                                      instances=[("none_nk", "Manufacturer"), ("usr", "@mkt_fx"), ("usr", "@sh_fx")])),
@@ -282,16 +282,17 @@ def build_worksheets() -> tuple[list[str], list[str]]:
                                   rows=q("[sum:Units:qk]"), cols=q("[mn:Month Date:ok]"),
                                   encodings=[("color", q("[yr:Month Date:ok]"))],
                                   instances=[("sum", "Units"), ("mn", "Month Date"), ("yr", "Month Date")])),
-        ("State Map", worksheet("State Map", "Units by state (each state's slice is fixed in this data)", "Multipolygon",
+        ("State Map", worksheet("State Map", "Units by state", "Multipolygon",
                                 rows=f"[{DS}].[Latitude (generated)]", cols=f"[{DS}].[Longitude (generated)]",
                                 encodings=[("color", q("[sum:Units:qk]")), ("lod", q("[none:State:nk]")),
                                            ("geometry", f"[{DS}].[Geometry (generated)]")],
                                 instances=[("sum", "Units"), ("none_nk", "State")], is_map=True)),
-        ("Brand x Tier", worksheet("Brand x Tier", "Unit change by brand and tier (blank = under Min Units)", "Text",
+        ("Brand x Tier", worksheet("Brand x Tier", "Unit change by brand and tier, over units a year earlier", "Text",
                                    rows=q("[none:Manufacturer:nk]"), cols=q("[none:Product:nk]"),
-                                   encodings=[("text", usr("chg_safe"))],
-                                   instances=[("none_nk", "Manufacturer"), ("none_nk", "Product"), ("usr", "@chg_safe")],
-                                   cell_formats=[(usr("chg_safe"), "p0.0%")])),
+                                   encodings=[("text", usr("chg_safe")), ("text", q("[sum:Units Year Earlier:qk]"))],
+                                   instances=[("none_nk", "Manufacturer"), ("none_nk", "Product"), ("usr", "@chg_safe"),
+                                              ("sum", "Units Year Earlier")],
+                                   cell_formats=[(usr("chg_safe"), "p0.0%"), (q("[sum:Units Year Earlier:qk]"), "n#,##0")])),
     ]
     return [n for n, _ in sheets], [x for _, x in sheets]
 
@@ -435,7 +436,8 @@ def dashboard_xml(sheet_names: list[str]) -> str:
     text([("How to read this", " bold='true' fontsize='10'"), ("Æ\n", ""),
           ("Brand share is measured against all four brands, so the brand filter hides lines without changing shares. "
            "Changes compare the selected months with the same months a year earlier. "
-           "Barefoot is the remainder brand: read its moves in share points.", " fontcolor='#6b6f78' fontsize='9'")],
+           "Barefoot is the remainder brand: read its moves in share points. "
+           "Min units hides a % change when either period has fewer units than the threshold.", " fontcolor='#6b6f78' fontsize='9'")],
          kx[2], ys[2], heights[2])
     cx = split([0.5, 0.5])
     sheet("Brand Share", cx[0], ys[3], heights[3])
@@ -499,7 +501,9 @@ def windows_xml(sheet_names: list[str]) -> str:
       </cards>
       <simple-id uuid='{uid()}' />
     </window>""")
-    vps = "\n".join(f"        <viewpoint name='{esc(n)}' />" for n in sheet_names)
+    fit = {"KPI Units", "KPI Change", "Brand x Tier"}
+    vps = "\n".join(f"        <viewpoint name='{esc(n)}'>\n          <zoom type='entire-view' />\n        </viewpoint>" if n in fit
+                     else f"        <viewpoint name='{esc(n)}' />" for n in sheet_names)
     ws.append(f"""    <window class='dashboard' maximized='true' name='Share Monitor'>
       <viewpoints>
 {vps}
