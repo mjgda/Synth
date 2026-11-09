@@ -26,6 +26,7 @@ DS_CAPTION = "market_share_tableau"
 TEXT_CONN = "textscan.1mk7shr4c5v0000000000000000"
 
 BRAND_COLORS = {"Valley Central": "#2a78d6", "Neptune": "#eb6834", "Cornfield": "#1baf7a", "Barefoot": "#eda100"}
+MIN_UNITS = 50  # bottom-table cells with fewer units than this in either period are left blank
 TIER_COLORS = {"Rail": "#e87ba4", "Call": "#008300", "Premium": "#6250d6", "Top Shelf": "#e34948"}
 
 
@@ -63,7 +64,7 @@ C = {k: f"Calculation_{n}" for k, n in [
     ("share", 7310000000000000004), ("tier_share", 7310000000000000005), ("chg", 7310000000000000006),
     ("low", 7310000000000000007), ("chg_safe", 7310000000000000008), ("mkt_fx", 7310000000000000009),
     ("sh_fx", 7310000000000000010), ("share_chg", 7310000000000000011), ("units_cmp", 7310000000000000012),
-    ("mkt_cmp", 7310000000000000013), ("low_label", 7310000000000000014)]}
+    ("mkt_cmp", 7310000000000000013)]}
 CALCS = {
     "units_cmp": ("Units (comparable)", "integer", "measure", "quantitative",
                   "IF NOT ISNULL([Units Year Earlier]) THEN [Units] END", None),
@@ -82,9 +83,7 @@ CALCS = {
     "chg": ("Units Change %", "real", "measure", "quantitative",
             f"IF SUM([Units Year Earlier]) > 0 THEN SUM([{C['units_cmp']}]) / SUM([Units Year Earlier]) - 1 END", "p0.0%"),
     "low": ("Low Volume", "boolean", "measure", "nominal",
-            f"SUM([{C['units_cmp']}]) < [Parameters].[Parameter 1] OR SUM([Units Year Earlier]) < [Parameters].[Parameter 1]", None),
-    "low_label": ("Below Min Label", "string", "measure", "nominal",
-                  f'IF [{C["low"]}] THEN "below min" END', None),
+            f"SUM([{C['units_cmp']}]) < {MIN_UNITS} OR SUM([Units Year Earlier]) < {MIN_UNITS}", None),
     "chg_safe": ("Units Change % (safe)", "real", "measure", "quantitative",
                  f"IF NOT [{C['low']}] THEN [{C['chg']}] END", "p0.0%"),
     "mkt_fx": ("Market Effect", "real", "measure", "quantitative",
@@ -100,17 +99,11 @@ CALC_DEPS = {
     "tier_tot": ["Month Date", "Manufacturer", "State", "Units"],
     "share": ["Units", "@mkt"], "tier_share": ["Units", "@tier_tot"],
     "units_cmp": ["Units", "Units Year Earlier"], "mkt_cmp": ["Units Year Earlier", "@mkt"],
-    "chg": ["Units Year Earlier", "@units_cmp"], "low": ["Units Year Earlier", "@units_cmp", "#param"],
-    "chg_safe": ["@low", "@chg"], "low_label": ["@low"], "mkt_fx": ["Units Year Earlier", "@mkt_cmp", "@mkt_py"],
+    "chg": ["Units Year Earlier", "@units_cmp"], "low": ["Units Year Earlier", "@units_cmp"],
+    "chg_safe": ["@low", "@chg"], "mkt_fx": ["Units Year Earlier", "@mkt_cmp", "@mkt_py"],
     "sh_fx": ["Units Year Earlier", "@units_cmp", "@mkt_cmp", "@mkt_py"],
     "share_chg": ["Units Year Earlier", "@units_cmp", "@mkt_cmp", "@mkt_py"],
 }
-PARAM = ("<column caption='Min units for % change' datatype='integer' name='[Parameter 1]' param-domain-type='range' "
-         "role='measure' type='quantitative' value='50'>\n"
-         "        <calculation class='tableau' formula='50' />\n"
-         "        <range granularity='50' max='10000' min='0' />\n"
-         "      </column>")
-
 
 def base_col_xml(name: str) -> str:
     n, dt, role, typ, _, _, extra = BASE_BY_NAME[name]
@@ -125,27 +118,28 @@ def calc_col_xml(key: str) -> str:
             f"            </column>")
 
 
-def closure(fields: list[str]) -> tuple[list[str], list[str], bool]:
+def closure(fields: list[str]) -> tuple[list[str], list[str]]:
     """Expand calc keys (prefixed @) to all base columns and calcs they depend on."""
-    base, calcs, param = set(), set(), False
+    base, calcs = set(), set()
     stack = list(fields)
     while stack:
         f = stack.pop()
-        if f == "#param":
-            param = True
-        elif f.startswith("@"):
+        if f.startswith("@"):
             k = f[1:]
             if k not in calcs:
                 calcs.add(k)
                 stack.extend(CALC_DEPS[k])
         else:
             base.add(f)
-    return sorted(base), [k for k in CALCS if k in calcs], param
+    return sorted(base), [k for k in CALCS if k in calcs]
 
 
 # ---- column instances -------------------------------------------------------------------------
 def inst(kind: str, field: str) -> tuple[str, str, str]:
     """Return (instance name, xml, base field or @calc)."""
+    if field.startswith("@") and kind == "sum":
+        name = f"[sum:{C[field[1:]]}:qk]"
+        return name, f"<column-instance column='[{C[field[1:]]}]' derivation='Sum' name='{name}' pivot='key' type='quantitative' />", field
     if field.startswith("@"):
         typ = CALCS[field[1:]][3]
         name = f"[usr:{C[field[1:]]}:{'nk' if typ == 'nominal' else 'qk'}]"
@@ -194,12 +188,9 @@ def worksheet(name: str, title: str, mark: str, rows: str = "", cols: str = "", 
             names[n] = True
             inst_xml.append(x)
             fields.append(f)
-    base, calcs, param = closure(fields)
+    base, calcs = closure(fields)
     deps = [base_col_xml(b) for b in base] + [calc_col_xml(k) for k in calcs] + inst_xml
     deps_xml = "\n            ".join(deps)
-    param_ds = "\n            <datasource name='Parameters' />" if param else ""
-    param_deps = (f"\n          <datasource-dependencies datasource='Parameters'>\n            {PARAM}\n          </datasource-dependencies>"
-                  if param else "")
     mapsrc = "\n          <mapsources>\n            <mapsource name='Tableau' />\n          </mapsources>" if is_map else ""
     map_filters = ""
     slices = [q(inst(k, f)[0]) for k, f, _ in SHARED_FILTERS]
@@ -236,11 +227,11 @@ def worksheet(name: str, title: str, mark: str, rows: str = "", cols: str = "", 
       <table>
         <view>
           <datasources>
-            <datasource caption='{DS_CAPTION}' name='{DS}' />{param_ds}
+            <datasource caption='{DS_CAPTION}' name='{DS}' />
           </datasources>{mapsrc}
           <datasource-dependencies datasource='{DS}'>
             {deps_xml}
-          </datasource-dependencies>{param_deps}
+          </datasource-dependencies>
           {map_filters}{filters_xml()}
           <slices>
             {slices_xml}
@@ -290,13 +281,14 @@ def build_worksheets() -> tuple[list[str], list[str]]:
                                 encodings=[("color", q("[sum:Units:qk]")), ("lod", q("[none:State:nk]")),
                                            ("geometry", f"[{DS}].[Geometry (generated)]")],
                                 instances=[("sum", "Units"), ("none_nk", "State")], is_map=True)),
-        ("Brand x Tier", worksheet("Brand x Tier", "Unit change by brand and tier, over units a year earlier", "Text",
+        ("Brand x Tier", worksheet("Brand x Tier", "Change vs a year earlier, by brand and tier", "Text",
                                    rows=q("[none:Manufacturer:nk]"), cols=q("[none:Product:nk]"),
-                                   encodings=[("text", usr("chg_safe")), ("text", q(f"[usr:{C['low_label']}:nk]")),
-                                              ("text", q("[sum:Units Year Earlier:qk]"))],
+                                   encodings=[("tooltip", q(f"[sum:{C['units_cmp']}:qk]")),
+                                              ("tooltip", q("[sum:Units Year Earlier:qk]")),
+                                              ("text", usr("chg_safe"))],
                                    instances=[("none_nk", "Manufacturer"), ("none_nk", "Product"), ("usr", "@chg_safe"),
-                                              ("usr", "@low_label"), ("sum", "Units Year Earlier")],
-                                   cell_formats=[(usr("chg_safe"), "p0.0%"), (q("[sum:Units Year Earlier:qk]"), "n#,##0")])),
+                                              ("sum", "@units_cmp"), ("sum", "Units Year Earlier")],
+                                   cell_formats=[(usr("chg_safe"), "p0.0%")])),
     ]
     return [n for n, _ in sheets], [x for _, x in sheets]
 
@@ -326,11 +318,7 @@ def datasource_xml() -> str:
                          for v, c in colors.items())
         return f"          <encoding attr='color' field='[none:{field}:nk]' type='palette'>\n{maps}\n          </encoding>"
 
-    return f"""    <datasource hasconnection='false' inline='true' name='Parameters' version='18.1'>
-      <aliases enabled='yes' />
-      {PARAM}
-    </datasource>
-    <datasource caption='{DS_CAPTION}' inline='true' name='{DS}' version='18.1'>
+    return f"""    <datasource caption='{DS_CAPTION}' inline='true' name='{DS}' version='18.1'>
       <connection class='federated'>
         <named-connections>
           <named-connection caption='{DS_CAPTION}' name='{TEXT_CONN}'>
@@ -427,14 +415,12 @@ def dashboard_xml(sheet_names: list[str]) -> str:
     text([("Four-Brand Share Monitor", " bold='true' fontsize='18'"), ("Æ\n", ""),
           ("Synthetic data, Jan 2020 – Jun 2026. 2026 covers Jan–Jun only, so compare it with the same months of 2025.", " fontcolor='#6b6f78' fontsize='10'")],
          full, ys[0], heights[0])
-    fx = split([0.26, 0.17, 0.15, 0.13, 0.15, 0.14])
+    fx = split([0.28, 0.2, 0.18, 0.16, 0.18])
     filt("none_qk", "Month Date", fx[0], ys[1], heights[1], mode=None)
     filt("none_nk", "Manufacturer", fx[1], ys[1], heights[1])
     filt("none_nk", "Product", fx[2], ys[1], heights[1])
     filt("none_nk", "Region", fx[3], ys[1], heights[1])
     filt("none_nk", "State", fx[4], ys[1], heights[1])
-    Z.append(f"<zone h='{heights[1]}' id='{next(zid)}' mode='slider' param='[Parameters].[Parameter 1]' type='paramctrl' "
-             f"w='{fx[5][1]}' x='{fx[5][0]}' y='{ys[1]}'>{zone_style()}</zone>")
     kx = split([0.22, 0.22, 0.56])
     sheet("KPI Units", kx[0], ys[2], heights[2], title=False)
     sheet("KPI Change", kx[1], ys[2], heights[2], title=False)
@@ -442,7 +428,8 @@ def dashboard_xml(sheet_names: list[str]) -> str:
           ("Brand share is measured against all four brands, so the brand filter hides lines without changing shares. "
            "Changes compare the selected months with the same months a year earlier. "
            "Barefoot is the remainder brand: read its moves in share points. "
-           "Min units hides a % change when either period has fewer units than the threshold.", " fontcolor='#6b6f78' fontsize='9'")],
+           f"In the bottom table, a cell is blank when either period has fewer than {MIN_UNITS} units, because "
+           "percentages on numbers that small are mostly noise. Hover over a cell to see its units.", " fontcolor='#6b6f78' fontsize='9'")],
          kx[2], ys[2], heights[2])
     cx = split([0.5, 0.5])
     sheet("Brand Share", cx[0], ys[3], heights[3])
@@ -460,12 +447,8 @@ def dashboard_xml(sheet_names: list[str]) -> str:
       <style />
       <size maxheight='1000' maxwidth='1200' minheight='1000' minwidth='1200' sizing-mode='fixed' />
       <datasources>
-        <datasource name='Parameters' />
         <datasource caption='{DS_CAPTION}' name='{DS}' />
       </datasources>
-      <datasource-dependencies datasource='Parameters'>
-        {PARAM}
-      </datasource-dependencies>
       <datasource-dependencies datasource='{DS}'>
         {base}
         {deps}
