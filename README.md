@@ -2,7 +2,7 @@
 
 Exploratory analysis of a synthetic market-share dataset (4 manufacturers × 4 product tiers × 51 states × 78 months) prepared for a Business Analytics Developer application.
 
-- **Results summary (for sharing):** [FINDINGS.md](FINDINGS.md)
+- **Results summary (for sharing):** [FINDINGS.pdf](FINDINGS.pdf) (source: [FINDINGS.md](FINDINGS.md))
 - **Full working report:** [REPORT.md](REPORT.md)
 - **Interactive dashboard:** [`dashboard/index.html`](dashboard/index.html). Download it and open it in a browser.
 - **Tableau Public version:** [`tableau/Four-Brand Share Monitor.twbx`](tableau/) (generated, not yet opened in Tableau) or build it yourself with [`tableau/BUILD_GUIDE.md`](tableau/BUILD_GUIDE.md)
