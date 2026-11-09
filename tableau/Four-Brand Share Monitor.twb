@@ -364,6 +364,7 @@
           </slices>
           <aggregation value='true' />
         </view>
+        <style />
         <panes>
           <pane selection-relaxation-option='selection-relaxation-allow'>
             <view>
@@ -393,7 +394,7 @@
         <rows />
         <cols />
       </table>
-      <simple-id uuid='{3B169972-D52B-4DF3-A6BE-6D041626E018}' />
+      <simple-id uuid='{25A984DE-4A55-4231-8300-AF8F577EB9D2}' />
     </worksheet>
     <worksheet name='KPI Change'>
       <layout-options>
@@ -454,6 +455,7 @@
           </slices>
           <aggregation value='true' />
         </view>
+        <style />
         <panes>
           <pane selection-relaxation-option='selection-relaxation-allow'>
             <view>
@@ -483,7 +485,7 @@
         <rows />
         <cols />
       </table>
-      <simple-id uuid='{4D870823-B2DA-46AF-A66D-23F12E09517D}' />
+      <simple-id uuid='{C0622258-A7A9-4726-9C87-F2DDFE439E27}' />
     </worksheet>
     <worksheet name='Brand Share'>
       <layout-options>
@@ -544,6 +546,7 @@
           </slices>
           <aggregation value='true' />
         </view>
+        <style />
         <panes>
           <pane selection-relaxation-option='selection-relaxation-allow'>
             <view>
@@ -558,7 +561,7 @@
         <rows>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[usr:Calculation_7310000000000000004:qk]</rows>
         <cols>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[tmn:Month Date:qk]</cols>
       </table>
-      <simple-id uuid='{677C6CDA-37E5-41EF-95A7-345B97C11F06}' />
+      <simple-id uuid='{6A63E58A-3C1C-404D-AD23-B84B386CAF6D}' />
     </worksheet>
     <worksheet name='Tier Mix'>
       <layout-options>
@@ -619,6 +622,7 @@
           </slices>
           <aggregation value='true' />
         </view>
+        <style />
         <panes>
           <pane selection-relaxation-option='selection-relaxation-allow'>
             <view>
@@ -633,7 +637,7 @@
         <rows>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[usr:Calculation_7310000000000000005:qk]</rows>
         <cols>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[tmn:Month Date:qk]</cols>
       </table>
-      <simple-id uuid='{FE1F870D-F804-49B0-8C62-D2A9A0AECBF6}' />
+      <simple-id uuid='{E6FF2F49-BA94-45BE-82C7-2BC49D62C440}' />
     </worksheet>
     <worksheet name='Change Drivers'>
       <layout-options>
@@ -707,6 +711,7 @@
           </slices>
           <aggregation value='true' />
         </view>
+        <style />
         <panes>
           <pane selection-relaxation-option='selection-relaxation-allow'>
             <view>
@@ -721,7 +726,7 @@
         <rows>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Manufacturer:nk]</rows>
         <cols>([federated.0mk7shr4m0n1t0r5yn7h3t1c00].[usr:Calculation_7310000000000000009:qk] + [federated.0mk7shr4m0n1t0r5yn7h3t1c00].[usr:Calculation_7310000000000000010:qk])</cols>
       </table>
-      <simple-id uuid='{3912240C-7A72-43FC-A177-8573466AE31D}' />
+      <simple-id uuid='{FF34ACF4-2E89-4618-9F9E-88C60D21B204}' />
     </worksheet>
     <worksheet name='Seasonality'>
       <layout-options>
@@ -777,6 +782,7 @@
           </slices>
           <aggregation value='true' />
         </view>
+        <style />
         <panes>
           <pane selection-relaxation-option='selection-relaxation-allow'>
             <view>
@@ -791,7 +797,7 @@
         <rows>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[sum:Units:qk]</rows>
         <cols>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[mn:Month Date:ok]</cols>
       </table>
-      <simple-id uuid='{A39ADE24-C871-4FB9-8923-65A60200FDDC}' />
+      <simple-id uuid='{AE3D0D4E-4B98-4BAC-A151-84FA8E6B68AD}' />
     </worksheet>
     <worksheet name='State Map'>
       <layout-options>
@@ -852,6 +858,7 @@
           </slices>
           <aggregation value='true' />
         </view>
+        <style />
         <panes>
           <pane selection-relaxation-option='selection-relaxation-allow'>
             <view>
@@ -868,7 +875,7 @@
         <rows>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[Latitude (generated)]</rows>
         <cols>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[Longitude (generated)]</cols>
       </table>
-      <simple-id uuid='{842D5A37-5FC7-4B7A-A115-E8A4D55DA133}' />
+      <simple-id uuid='{B25E2F31-12CA-49C2-93C7-043CF23B7DB6}' />
     </worksheet>
     <worksheet name='Brand x Tier'>
       <layout-options>
@@ -961,11 +968,11 @@
         <rows>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Manufacturer:nk]</rows>
         <cols>[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Product:nk]</cols>
       </table>
-      <simple-id uuid='{0EABC7CA-6D92-4A2C-BDDB-55DF25BEF826}' />
+      <simple-id uuid='{747CE378-9FA5-40E3-8E95-F3275075CE24}' />
     </worksheet>
   </worksheets>
   <dashboards>
-    <dashboard enable-sort-zone-taborder='true' name='Share Monitor'>
+    <dashboard name='Share Monitor'>
       <style />
       <size maxheight='1000' maxwidth='1200' minheight='1000' minwidth='1200' sizing-mode='fixed' />
       <datasources>
@@ -991,11 +998,12 @@
         <column-instance column='[State]' derivation='None' name='[none:State:nk]' pivot='key' type='nominal' />
       </datasource-dependencies>
       <zones>
-        <zone h='100000' id='2' type-v2='layout-basic' w='100000' x='0' y='0'>
-          <zone forceUpdate='true' h='6000' id='3' type-v2='text' w='98400' x='800' y='400'>
+        <zone h='100000' id='2' type='layout-basic' w='100000' x='0' y='0'>
+          <zone forceUpdate='true' h='6000' id='3' type='text' w='98400' x='800' y='400'>
             <formatted-text>
               <run bold='true' fontsize='20'>Four-Brand Share Monitor</run>
-              <run fontsize='10'> Synthetic data, Jan 2020 – Jun 2026. 2026 covers Jan–Jun only: compare it with the same months of 2025.</run>
+              <run>Æ&#10;</run>
+              <run fontsize='10'>Synthetic data, Jan 2020 – Jun 2026. 2026 covers Jan–Jun only: compare it with the same months of 2025.</run>
             </formatted-text>
             <zone-style>
               <format attr='border-color' value='#000000' />
@@ -1004,7 +1012,7 @@
               <format attr='margin' value='4' />
             </zone-style>
           </zone>
-          <zone h='6500' id='4' name='Brand Share' param='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Month Date:qk]' type-v2='filter' values='database' w='26000' x='800' y='6800'>
+          <zone h='6500' id='4' name='Brand Share' param='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Month Date:qk]' type='filter' values='database' w='26000' x='800' y='6800'>
             <zone-style>
               <format attr='border-color' value='#000000' />
               <format attr='border-style' value='none' />
@@ -1012,7 +1020,7 @@
               <format attr='margin' value='4' />
             </zone-style>
           </zone>
-          <zone h='6500' id='5' mode='checkdropdown' name='Brand Share' param='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Manufacturer:nk]' type-v2='filter' values='database' w='17000' x='27400' y='6800'>
+          <zone h='6500' id='5' mode='checkdropdown' name='Brand Share' param='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Manufacturer:nk]' type='filter' values='database' w='17000' x='27400' y='6800'>
             <zone-style>
               <format attr='border-color' value='#000000' />
               <format attr='border-style' value='none' />
@@ -1020,7 +1028,7 @@
               <format attr='margin' value='4' />
             </zone-style>
           </zone>
-          <zone h='6500' id='6' mode='checkdropdown' name='Brand Share' param='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Product:nk]' type-v2='filter' values='database' w='15000' x='45000' y='6800'>
+          <zone h='6500' id='6' mode='checkdropdown' name='Brand Share' param='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Product:nk]' type='filter' values='database' w='15000' x='45000' y='6800'>
             <zone-style>
               <format attr='border-color' value='#000000' />
               <format attr='border-style' value='none' />
@@ -1028,7 +1036,7 @@
               <format attr='margin' value='4' />
             </zone-style>
           </zone>
-          <zone h='6500' id='7' mode='checkdropdown' name='Brand Share' param='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Region:nk]' type-v2='filter' values='database' w='13000' x='60600' y='6800'>
+          <zone h='6500' id='7' mode='checkdropdown' name='Brand Share' param='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:Region:nk]' type='filter' values='database' w='13000' x='60600' y='6800'>
             <zone-style>
               <format attr='border-color' value='#000000' />
               <format attr='border-style' value='none' />
@@ -1036,7 +1044,7 @@
               <format attr='margin' value='4' />
             </zone-style>
           </zone>
-          <zone h='6500' id='8' mode='checkdropdown' name='Brand Share' param='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:State:nk]' type-v2='filter' values='database' w='13000' x='74200' y='6800'>
+          <zone h='6500' id='8' mode='checkdropdown' name='Brand Share' param='[federated.0mk7shr4m0n1t0r5yn7h3t1c00].[none:State:nk]' type='filter' values='database' w='13000' x='74200' y='6800'>
             <zone-style>
               <format attr='border-color' value='#000000' />
               <format attr='border-style' value='none' />
@@ -1044,7 +1052,7 @@
               <format attr='margin' value='4' />
             </zone-style>
           </zone>
-          <zone h='6500' id='9' mode='slider' param='[Parameters].[Parameter 1]' type-v2='paramctrl' w='11400' x='87800' y='6800'>
+          <zone h='6500' id='9' mode='slider' param='[Parameters].[Parameter 1]' type='paramctrl' w='11400' x='87800' y='6800'>
             <zone-style>
               <format attr='border-color' value='#000000' />
               <format attr='border-style' value='none' />
@@ -1068,10 +1076,11 @@
               <format attr='margin' value='4' />
             </zone-style>
           </zone>
-          <zone forceUpdate='true' h='9000' id='12' type-v2='text' w='49200' x='50000' y='13800'>
+          <zone forceUpdate='true' h='9000' id='12' type='text' w='49200' x='50000' y='13800'>
             <formatted-text>
               <run bold='true' fontsize='11'>How to read this</run>
-              <run fontsize='9'> Brand share is measured against all four brands, so the brand filter hides lines without changing shares. Change figures compare the selected months with the same months a year earlier, so start the date filter in 2021 or later. Barefoot is the remainder brand: read its moves in share points.</run>
+              <run>Æ&#10;</run>
+              <run fontsize='9'>Brand share is measured against all four brands, so the brand filter hides lines without changing shares. Change figures compare the selected months with the same months a year earlier, so start the date filter in 2021 or later. Barefoot is the remainder brand: read its moves in share points.</run>
             </formatted-text>
             <zone-style>
               <format attr='border-color' value='#000000' />
@@ -1130,7 +1139,7 @@
           </zone>
         </zone>
       </zones>
-      <simple-id uuid='{71FCBB3F-E347-40B5-8C7D-0C8FB1151AC7}' />
+      <simple-id uuid='{1282D2E8-E7F2-4977-AF8E-E8E76B151B74}' />
     </dashboard>
   </dashboards>
   <windows source-height='30'>
@@ -1155,7 +1164,7 @@
           </strip>
         </edge>
       </cards>
-      <simple-id uuid='{B0D806A9-4C31-4845-903E-7DA92575C73D}' />
+      <simple-id uuid='{35B613BB-15AD-440F-8DA7-8D3FBCD0CBA8}' />
     </window>
     <window class='worksheet' name='KPI Change'>
       <cards>
@@ -1178,7 +1187,7 @@
           </strip>
         </edge>
       </cards>
-      <simple-id uuid='{4D1D2807-6DC6-45A9-B26E-4EDDD446806F}' />
+      <simple-id uuid='{A3E4E58A-1772-40E8-8887-0BB8F11F10E6}' />
     </window>
     <window class='worksheet' name='Brand Share'>
       <cards>
@@ -1201,7 +1210,7 @@
           </strip>
         </edge>
       </cards>
-      <simple-id uuid='{2FE87031-4090-408B-BB11-202D04C4B61A}' />
+      <simple-id uuid='{85068ECF-7A0B-472E-8876-ADD9FAFE3301}' />
     </window>
     <window class='worksheet' name='Tier Mix'>
       <cards>
@@ -1224,7 +1233,7 @@
           </strip>
         </edge>
       </cards>
-      <simple-id uuid='{C4A66CF3-7D09-406B-BB1C-C72C102FAACA}' />
+      <simple-id uuid='{42B47658-F5E4-4AFC-A176-8A5CF1448192}' />
     </window>
     <window class='worksheet' name='Change Drivers'>
       <cards>
@@ -1247,7 +1256,7 @@
           </strip>
         </edge>
       </cards>
-      <simple-id uuid='{65D47A40-CA88-4E24-83D0-E0F5E92880B5}' />
+      <simple-id uuid='{9B0C924E-410A-490A-9C2B-F7619F45A90D}' />
     </window>
     <window class='worksheet' name='Seasonality'>
       <cards>
@@ -1270,7 +1279,7 @@
           </strip>
         </edge>
       </cards>
-      <simple-id uuid='{19801E9B-6E92-48AF-AB81-A4BB81970688}' />
+      <simple-id uuid='{AF4F04C5-E420-4EDC-AC5D-745C5A3F5684}' />
     </window>
     <window class='worksheet' name='State Map'>
       <cards>
@@ -1293,7 +1302,7 @@
           </strip>
         </edge>
       </cards>
-      <simple-id uuid='{BB3168DA-ADD4-4BDC-BFD2-24EF5D295934}' />
+      <simple-id uuid='{9114E7C3-1D43-46CF-B0D4-FEC5E2D1ACDA}' />
     </window>
     <window class='worksheet' name='Brand x Tier'>
       <cards>
@@ -1316,7 +1325,7 @@
           </strip>
         </edge>
       </cards>
-      <simple-id uuid='{53850208-28E0-448C-A325-859E5CDC3EA1}' />
+      <simple-id uuid='{5578DEBE-BCAD-47B4-AB43-3FD807CCFE96}' />
     </window>
     <window class='dashboard' maximized='true' name='Share Monitor'>
       <viewpoints>
@@ -1330,7 +1339,7 @@
         <viewpoint name='Brand x Tier' />
       </viewpoints>
       <active id='-1' />
-      <simple-id uuid='{E1437C9E-647A-47F8-A893-DA358F711BEF}' />
+      <simple-id uuid='{571FE377-887A-4980-A38D-9CCCB37DC84C}' />
     </window>
   </windows>
 </workbook>

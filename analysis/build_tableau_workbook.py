@@ -215,7 +215,7 @@ def worksheet(name: str, title: str, mark: str, rows: str = "", cols: str = "", 
                  f"\n            <style>\n              <style-rule element='cell'>\n                <format attr='text-align' value='center' />\n"
                  f"              </style-rule>\n              <style-rule element='mark'>\n"
                  f"                <format attr='mark-labels-show' value='true' />\n              </style-rule>\n            </style>")
-    fmt = ""
+    fmt = "\n        <style />"
     if cell_formats:
         rules = "\n".join(f"            <format attr='text-format' field='{f}' value='{esc(v)}' />" for f, v in cell_formats)
         fmt = f"\n        <style>\n          <style-rule element='cell'>\n{rules}\n          </style-rule>\n        </style>"
@@ -387,28 +387,28 @@ def dashboard_xml(sheet_names: list[str]) -> str:
 
     def text(runs, x, y, w, h):
         r = "\n".join(f"              <run{a}>{esc(t)}</run>" for t, a in runs)
-        Z.append(f"<zone forceUpdate='true' h='{h}' id='{next(zid)}' type-v2='text' w='{w}' x='{x}' y='{y}'>\n"
+        Z.append(f"<zone forceUpdate='true' h='{h}' id='{next(zid)}' type='text' w='{w}' x='{x}' y='{y}'>\n"
                  f"            <formatted-text>\n{r}\n            </formatted-text>{zone_style()}</zone>")
 
     def filt(kind, field, x, y, w, h, mode="checkdropdown"):
         name, _, _ = inst(kind, field)
         m = f" mode='{mode}'" if mode else ""
-        Z.append(f"<zone h='{h}' id='{next(zid)}'{m} name='Brand Share' param='{q(name)}' type-v2='filter' values='database' "
+        Z.append(f"<zone h='{h}' id='{next(zid)}'{m} name='Brand Share' param='{q(name)}' type='filter' values='database' "
                  f"w='{w}' x='{x}' y='{y}'>{zone_style()}</zone>")
 
-    text([("Four-Brand Share Monitor", " bold='true' fontsize='20'"),
-          (" Synthetic data, Jan 2020 – Jun 2026. 2026 covers Jan–Jun only: compare it with the same months of 2025.", " fontsize='10'")],
+    text([("Four-Brand Share Monitor", " bold='true' fontsize='20'"), ("Æ\n", ""),
+          ("Synthetic data, Jan 2020 – Jun 2026. 2026 covers Jan–Jun only: compare it with the same months of 2025.", " fontsize='10'")],
          800, 400, 98400, 6000)
     filt("none_qk", "Month Date", 800, 6800, 26000, 6500, mode=None)
     filt("none_nk", "Manufacturer", 27400, 6800, 17000, 6500)
     filt("none_nk", "Product", 45000, 6800, 15000, 6500)
     filt("none_nk", "Region", 60600, 6800, 13000, 6500)
     filt("none_nk", "State", 74200, 6800, 13000, 6500)
-    Z.append(f"<zone h='6500' id='{next(zid)}' mode='slider' param='[Parameters].[Parameter 1]' type-v2='paramctrl' w='11400' x='87800' y='6800'>{zone_style()}</zone>")
+    Z.append(f"<zone h='6500' id='{next(zid)}' mode='slider' param='[Parameters].[Parameter 1]' type='paramctrl' w='11400' x='87800' y='6800'>{zone_style()}</zone>")
     sheet("KPI Units", 800, 13800, 24000, 9000)
     sheet("KPI Change", 25400, 13800, 24000, 9000)
-    text([("How to read this", " bold='true' fontsize='11'"),
-          (" Brand share is measured against all four brands, so the brand filter hides lines without changing shares. "
+    text([("How to read this", " bold='true' fontsize='11'"), ("Æ\n", ""),
+          ("Brand share is measured against all four brands, so the brand filter hides lines without changing shares. "
            "Change figures compare the selected months with the same months a year earlier, so start the date filter in 2021 or later. "
            "Barefoot is the remainder brand: read its moves in share points.", " fontsize='9'")],
          50000, 13800, 49200, 9000)
@@ -422,7 +422,7 @@ def dashboard_xml(sheet_names: list[str]) -> str:
     deps = "\n        ".join(inst(k, f)[1] for k, f, _ in SHARED_FILTERS)
     base = "\n        ".join(base_col_xml(f) for _, f, _ in SHARED_FILTERS)
     return f"""  <dashboards>
-    <dashboard enable-sort-zone-taborder='true' name='Share Monitor'>
+    <dashboard name='Share Monitor'>
       <style />
       <size maxheight='1000' maxwidth='1200' minheight='1000' minwidth='1200' sizing-mode='fixed' />
       <datasources>
@@ -437,7 +437,7 @@ def dashboard_xml(sheet_names: list[str]) -> str:
         {deps}
       </datasource-dependencies>
       <zones>
-        <zone h='100000' id='2' type-v2='layout-basic' w='100000' x='0' y='0'>
+        <zone h='100000' id='2' type='layout-basic' w='100000' x='0' y='0'>
           {zones}
         </zone>
       </zones>
