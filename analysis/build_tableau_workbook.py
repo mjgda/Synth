@@ -182,7 +182,7 @@ def filters_xml() -> str:
 
 def worksheet(name: str, title: str, mark: str, rows: str = "", cols: str = "", encodings: list[tuple[str, str]] = (),
               instances: list[tuple[str, str]] = (), cell_formats: list[tuple[str, str]] = (), big_label: str | None = None,
-              is_map: bool = False) -> str:
+              caption: str = "", is_map: bool = False) -> str:
     all_inst = list(instances) + [(k, f) for k, f, _ in SHARED_FILTERS]
     names, inst_xml, fields = {}, [], []
     for kind, field in all_inst:
@@ -210,8 +210,9 @@ def worksheet(name: str, title: str, mark: str, rows: str = "", cols: str = "", 
     label = ""
     if big_label:
         label = (f"\n            <customized-label>\n              <formatted-text>\n"
-                 f"                <run fontsize='26'>&lt;</run>\n                <run fontsize='26'>{big_label}</run>\n"
-                 f"                <run fontsize='26'>&gt;</run>\n              </formatted-text>\n            </customized-label>"
+                 f"                <run fontcolor='#6b6f78' fontsize='10'>{esc(caption)}</run>\n                <run>Æ&#10;</run>\n"
+                 f"                <run bold='true' fontsize='22'>&lt;</run>\n                <run bold='true' fontsize='22'>{big_label}</run>\n"
+                 f"                <run bold='true' fontsize='22'>&gt;</run>\n              </formatted-text>\n            </customized-label>"
                  f"\n            <style>\n              <style-rule element='cell'>\n                <format attr='text-align' value='center' />\n"
                  f"              </style-rule>\n              <style-rule element='mark'>\n"
                  f"                <format attr='mark-labels-show' value='true' />\n              </style-rule>\n            </style>")
@@ -261,10 +262,10 @@ def build_worksheets() -> tuple[list[str], list[str]]:
     sheets = [
         ("KPI Units", worksheet("KPI Units", "Units (selected period)", "Text",
                                 encodings=[("text", q("[sum:Units:qk]"))], instances=[("sum", "Units")],
-                                big_label=q("[sum:Units:qk]"))),
+                                big_label=q("[sum:Units:qk]"), caption="Units, selected brands and months")),
         ("KPI Change", worksheet("KPI Change", "Change vs the same months a year earlier (2021 onward)", "Text",
                                  encodings=[("text", usr("chg"))], instances=[("usr", "@chg")],
-                                 big_label=usr("chg"))),
+                                 big_label=usr("chg"), caption="Change vs the same months a year earlier")),
         ("Brand Share", worksheet("Brand Share", "Brand share of units (all four brands = 100%)", "Line",
                                   rows=usr("share"), cols=q("[tmn:Month Date:qk]"),
                                   encodings=[("color", q("[none:Manufacturer:nk]"))],
@@ -359,6 +360,8 @@ def datasource_xml() -> str:
       <aliases enabled='yes' />
       {base_cols}
       {calc_cols}
+      <column-instance column='[Manufacturer]' derivation='None' name='[none:Manufacturer:nk]' pivot='key' type='nominal' />
+      <column-instance column='[Product]' derivation='None' name='[none:Product:nk]' pivot='key' type='nominal' />
       <layout dim-ordering='alphabetic' dim-percentage='0.5' measure-ordering='alphabetic' measure-percentage='0.4' show-structure='true' />
       <style>
         <style-rule element='mark'>
@@ -381,43 +384,67 @@ def zone_style() -> str:
 def dashboard_xml(sheet_names: list[str]) -> str:
     zid = iter(range(3, 100))
     Z = []
+    X0, X1 = 667, 100000 - 667          # 8 px side padding on a 1200 px wide dashboard
+    Y0, Y1 = 800, 100000 - 800          # 8 px top/bottom padding on a 1000 px tall dashboard
 
-    def sheet(name, x, y, w, h):
-        Z.append(f"<zone h='{h}' id='{next(zid)}' name='{esc(name)}' show-title='true' w='{w}' x='{x}' y='{y}'>{zone_style()}</zone>")
+    def split(fracs):
+        edges, acc = [X0], 0.0
+        for f in fracs[:-1]:
+            acc += f
+            edges.append(X0 + round((X1 - X0) * acc))
+        edges.append(X1)
+        return [(edges[i], edges[i + 1] - edges[i]) for i in range(len(fracs))]
 
-    def text(runs, x, y, w, h):
+    def sheet(name, xw, y, h, title=True):
+        x, w = xw
+        Z.append(f"<zone h='{h}' id='{next(zid)}' name='{esc(name)}' show-title='{'true' if title else 'false'}' w='{w}' x='{x}' y='{y}'>{zone_style()}</zone>")
+
+    def text(runs, xw, y, h):
+        x, w = xw
         r = "\n".join(f"              <run{a}>{esc(t)}</run>" for t, a in runs)
         Z.append(f"<zone forceUpdate='true' h='{h}' id='{next(zid)}' type='text' w='{w}' x='{x}' y='{y}'>\n"
                  f"            <formatted-text>\n{r}\n            </formatted-text>{zone_style()}</zone>")
 
-    def filt(kind, field, x, y, w, h, mode="checkdropdown"):
+    def filt(kind, field, xw, y, h, mode="checkdropdown"):
+        x, w = xw
         name, _, _ = inst(kind, field)
         m = f" mode='{mode}'" if mode else ""
         Z.append(f"<zone h='{h}' id='{next(zid)}'{m} name='Brand Share' param='{q(name)}' type='filter' values='database' "
                  f"w='{w}' x='{x}' y='{y}'>{zone_style()}</zone>")
 
-    text([("Four-Brand Share Monitor", " bold='true' fontsize='20'"), ("Æ\n", ""),
-          ("Synthetic data, Jan 2020 – Jun 2026. 2026 covers Jan–Jun only: compare it with the same months of 2025.", " fontsize='10'")],
-         800, 400, 98400, 6000)
-    filt("none_qk", "Month Date", 800, 6800, 26000, 6500, mode=None)
-    filt("none_nk", "Manufacturer", 27400, 6800, 17000, 6500)
-    filt("none_nk", "Product", 45000, 6800, 15000, 6500)
-    filt("none_nk", "Region", 60600, 6800, 13000, 6500)
-    filt("none_nk", "State", 74200, 6800, 13000, 6500)
-    Z.append(f"<zone h='6500' id='{next(zid)}' mode='slider' param='[Parameters].[Parameter 1]' type='paramctrl' w='11400' x='87800' y='6800'>{zone_style()}</zone>")
-    sheet("KPI Units", 800, 13800, 24000, 9000)
-    sheet("KPI Change", 25400, 13800, 24000, 9000)
-    text([("How to read this", " bold='true' fontsize='11'"), ("Æ\n", ""),
+    heights = [6000, 6500, 10000, 25000, 25000]
+    ys = [Y0]
+    for h in heights:
+        ys.append(ys[-1] + h)
+    heights.append(Y1 - ys[-1])          # last row takes the remainder
+    full = split([1.0])[0]
+    text([("Four-Brand Share Monitor", " bold='true' fontsize='18'"), ("Æ\n", ""),
+          ("Synthetic data, Jan 2020 – Jun 2026. 2026 covers Jan–Jun only, so compare it with the same months of 2025.", " fontcolor='#6b6f78' fontsize='10'")],
+         full, ys[0], heights[0])
+    fx = split([0.26, 0.17, 0.15, 0.13, 0.15, 0.14])
+    filt("none_qk", "Month Date", fx[0], ys[1], heights[1], mode=None)
+    filt("none_nk", "Manufacturer", fx[1], ys[1], heights[1])
+    filt("none_nk", "Product", fx[2], ys[1], heights[1])
+    filt("none_nk", "Region", fx[3], ys[1], heights[1])
+    filt("none_nk", "State", fx[4], ys[1], heights[1])
+    Z.append(f"<zone h='{heights[1]}' id='{next(zid)}' mode='slider' param='[Parameters].[Parameter 1]' type='paramctrl' "
+             f"w='{fx[5][1]}' x='{fx[5][0]}' y='{ys[1]}'>{zone_style()}</zone>")
+    kx = split([0.22, 0.22, 0.56])
+    sheet("KPI Units", kx[0], ys[2], heights[2], title=False)
+    sheet("KPI Change", kx[1], ys[2], heights[2], title=False)
+    text([("How to read this", " bold='true' fontsize='10'"), ("Æ\n", ""),
           ("Brand share is measured against all four brands, so the brand filter hides lines without changing shares. "
-           "Change figures compare the selected months with the same months a year earlier, so start the date filter in 2021 or later. "
-           "Barefoot is the remainder brand: read its moves in share points.", " fontsize='9'")],
-         50000, 13800, 49200, 9000)
-    sheet("Brand Share", 800, 23400, 48900, 25000)
-    sheet("Tier Mix", 50300, 23400, 48900, 25000)
-    sheet("Change Drivers", 800, 49000, 32300, 24000)
-    sheet("Seasonality", 33800, 49000, 32300, 24000)
-    sheet("State Map", 66800, 49000, 32400, 24000)
-    sheet("Brand x Tier", 800, 73600, 98400, 25600)
+           "Changes compare the selected months with the same months a year earlier. "
+           "Barefoot is the remainder brand: read its moves in share points.", " fontcolor='#6b6f78' fontsize='9'")],
+         kx[2], ys[2], heights[2])
+    cx = split([0.5, 0.5])
+    sheet("Brand Share", cx[0], ys[3], heights[3])
+    sheet("Tier Mix", cx[1], ys[3], heights[3])
+    ex = split([1 / 3, 1 / 3, 1 / 3])
+    sheet("Change Drivers", ex[0], ys[4], heights[4])
+    sheet("Seasonality", ex[1], ys[4], heights[4])
+    sheet("State Map", ex[2], ys[4], heights[4])
+    sheet("Brand x Tier", full, ys[5], heights[5])
     zones = "\n          ".join(Z)
     deps = "\n        ".join(inst(k, f)[1] for k, f, _ in SHARED_FILTERS)
     base = "\n        ".join(base_col_xml(f) for _, f, _ in SHARED_FILTERS)
@@ -449,7 +476,7 @@ def dashboard_xml(sheet_names: list[str]) -> str:
 def windows_xml(sheet_names: list[str]) -> str:
     ws = []
     for n in sheet_names:
-        ws.append(f"""    <window class='worksheet' name='{esc(n)}'>
+        ws.append(f"""    <window class='worksheet' hidden='true' name='{esc(n)}'>
       <cards>
         <edge name='left'>
           <strip size='160'>
