@@ -63,7 +63,7 @@ C = {k: f"Calculation_{n}" for k, n in [
     ("share", 7310000000000000004), ("tier_share", 7310000000000000005), ("chg", 7310000000000000006),
     ("low", 7310000000000000007), ("chg_safe", 7310000000000000008), ("mkt_fx", 7310000000000000009),
     ("sh_fx", 7310000000000000010), ("share_chg", 7310000000000000011), ("units_cmp", 7310000000000000012),
-    ("mkt_cmp", 7310000000000000013)]}
+    ("mkt_cmp", 7310000000000000013), ("low_label", 7310000000000000014)]}
 CALCS = {
     "units_cmp": ("Units (comparable)", "integer", "measure", "quantitative",
                   "IF NOT ISNULL([Units Year Earlier]) THEN [Units] END", None),
@@ -83,6 +83,8 @@ CALCS = {
             f"IF SUM([Units Year Earlier]) > 0 THEN SUM([{C['units_cmp']}]) / SUM([Units Year Earlier]) - 1 END", "p0.0%"),
     "low": ("Low Volume", "boolean", "measure", "nominal",
             f"SUM([{C['units_cmp']}]) < [Parameters].[Parameter 1] OR SUM([Units Year Earlier]) < [Parameters].[Parameter 1]", None),
+    "low_label": ("Below Min Label", "string", "measure", "nominal",
+                  f'IF [{C["low"]}] THEN "below min" END', None),
     "chg_safe": ("Units Change % (safe)", "real", "measure", "quantitative",
                  f"IF NOT [{C['low']}] THEN [{C['chg']}] END", "p0.0%"),
     "mkt_fx": ("Market Effect", "real", "measure", "quantitative",
@@ -99,7 +101,7 @@ CALC_DEPS = {
     "share": ["Units", "@mkt"], "tier_share": ["Units", "@tier_tot"],
     "units_cmp": ["Units", "Units Year Earlier"], "mkt_cmp": ["Units Year Earlier", "@mkt"],
     "chg": ["Units Year Earlier", "@units_cmp"], "low": ["Units Year Earlier", "@units_cmp", "#param"],
-    "chg_safe": ["@low", "@chg"], "mkt_fx": ["Units Year Earlier", "@mkt_cmp", "@mkt_py"],
+    "chg_safe": ["@low", "@chg"], "low_label": ["@low"], "mkt_fx": ["Units Year Earlier", "@mkt_cmp", "@mkt_py"],
     "sh_fx": ["Units Year Earlier", "@units_cmp", "@mkt_cmp", "@mkt_py"],
     "share_chg": ["Units Year Earlier", "@units_cmp", "@mkt_cmp", "@mkt_py"],
 }
@@ -145,8 +147,9 @@ def closure(fields: list[str]) -> tuple[list[str], list[str], bool]:
 def inst(kind: str, field: str) -> tuple[str, str, str]:
     """Return (instance name, xml, base field or @calc)."""
     if field.startswith("@"):
-        name = f"[usr:{C[field[1:]]}:qk]"
-        return name, f"<column-instance column='[{C[field[1:]]}]' derivation='User' name='{name}' pivot='key' type='quantitative' />", field
+        typ = CALCS[field[1:]][3]
+        name = f"[usr:{C[field[1:]]}:{'nk' if typ == 'nominal' else 'qk'}]"
+        return name, f"<column-instance column='[{C[field[1:]]}]' derivation='User' name='{name}' pivot='key' type='{typ}' />", field
     deriv, prefix, suffix, typ = {
         "none_nk": ("None", "none", "nk", "nominal"), "none_qk": ("None", "none", "qk", "quantitative"),
         "sum": ("Sum", "sum", "qk", "quantitative"), "tmn": ("Month-Trunc", "tmn", "qk", "quantitative"),
@@ -289,9 +292,10 @@ def build_worksheets() -> tuple[list[str], list[str]]:
                                 instances=[("sum", "Units"), ("none_nk", "State")], is_map=True)),
         ("Brand x Tier", worksheet("Brand x Tier", "Unit change by brand and tier, over units a year earlier", "Text",
                                    rows=q("[none:Manufacturer:nk]"), cols=q("[none:Product:nk]"),
-                                   encodings=[("text", usr("chg_safe")), ("text", q("[sum:Units Year Earlier:qk]"))],
+                                   encodings=[("text", usr("chg_safe")), ("text", q(f"[usr:{C['low_label']}:nk]")),
+                                              ("text", q("[sum:Units Year Earlier:qk]"))],
                                    instances=[("none_nk", "Manufacturer"), ("none_nk", "Product"), ("usr", "@chg_safe"),
-                                              ("sum", "Units Year Earlier")],
+                                              ("usr", "@low_label"), ("sum", "Units Year Earlier")],
                                    cell_formats=[(usr("chg_safe"), "p0.0%"), (q("[sum:Units Year Earlier:qk]"), "n#,##0")])),
     ]
     return [n for n, _ in sheets], [x for _, x in sheets]
@@ -410,7 +414,8 @@ def dashboard_xml(sheet_names: list[str]) -> str:
         x, w = xw
         name, _, _ = inst(kind, field)
         m = f" mode='{mode}'" if mode else ""
-        Z.append(f"<zone h='{h}' id='{next(zid)}'{m} name='Brand Share' param='{q(name)}' type='filter' values='database' "
+        vals = "database" if kind == "none_qk" else "cascading"
+        Z.append(f"<zone h='{h}' id='{next(zid)}'{m} name='Brand Share' param='{q(name)}' type='filter' values='{vals}' "
                  f"w='{w}' x='{x}' y='{y}'>{zone_style()}</zone>")
 
     heights = [6000, 6500, 10000, 25000, 25000]
